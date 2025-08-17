@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Me</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <style>
+    
+    /* Sidebar slide animation */
+    .sidebar-enter {
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+    .sidebar-enter-active {
+      transform: translateY(0);
+      transition: transform 0.3s ease;
+    }
+    /* Hamburger animation */
+    .hamburger-open #line1 {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger-open #line2 {
+      opacity: 0;
+    }
+    .hamburger-open #line3 {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  </style>
+
+  <section 
+  id="home" 
+  class="min-h-screen flex items-center justify-center" 
+  style="background-image: url('https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755431202/Typography_uqyxqt.svg'); 
+         background-size: cover; 
+         background-position: center; 
+         background-repeat: no-repeat;">
+</section>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Fixed Header -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-50">
+    <div class="flex justify-end items-center px-4 sm:px-6 py-3 sm:py-4">
+      <button id="hamburger" class="flex flex-col space-y-1 cursor-pointer w-6 h-6 justify-center items-center">
+        <div id="line1" class="hamburger-line w-5 sm:w-6 h-0.5 bg-gray-50 transition-all duration-300"></div>
+        <div id="line2" class="hamburger-line w-5 sm:w-6 h-0.5 bg-gray-50 transition-all duration-300"></div>
+        <div id="line3" class="hamburger-line w-5 sm:w-6 h-0.5 bg-gray-50 transition-all duration-300"></div>
+      </button>
+    </div>
+  </header>
+
+  <!-- Sidebar Navigation -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-[9999] opacity-0 invisible transition-opacity duration-300">
+    <nav id="sidebar" class="fixed top-0 left-0 right-0 h-80 sm:h-96 bg-white z-[10000] sidebar-enter">
+      <div class="p-4 sm:p-6">
+        <div class="flex justify-between items-center mb-6 sm:mb-8">
+          <a href="index.html" class="text-lg sm:text-xl font-light hover:text-[#e0b868] text-black">
+            Amal Anilkumar
+          </a>
+          <button id="close-x" class="text-black hover:text-[#e0b868] transition-colors cursor-pointer">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <ul class="space-y-4 sm:space-y-6 text-right">
+          <li><a href="index.html" class="block text-base sm:text-lg hover:text-[#e0b868] transition-colors sidebar-link text-black">Home</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="min-h-screen flex flex-col items-center justify-start py-16 px-4">
+  <h1 class="text-4xl font-family mb-12 text-center">
+    Amal Anilkumar Here!
+  </h1>
+  <p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-4">
+    A 24 year old passionate UI/UX designer with a background in commerce and currently investing heavily in upskilling in UI/UX related fields.
+  </p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-4">
+  I started my design story back in 2019. At that time, I was doing my Bachelor's and working as a freelancer, particularly with Cryptocurrency Marketing and Agents.
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-4">
+  My job was simple at the time: creating digital assets, social media posts, marketing materials, and promotions. I didn’t know about UI or UX design yet, but I knew I loved design and felt passionate and excited when delivering more than what the client expected.
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-4">
+  A simple work from my old desktop pc earned me descent pocket money a teenager can wish for, but I never knew about the filed's potential or mine.
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-4">
+  As an average student from a mid tier family, I voted for the usual way of every aimless, directionless, unfocused drifter teenager. "Go with the flow".
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-4">
+  After completing a bachelor's in commerce and a diploma in logistics and supply chain management (trending at that time) I flew to UAE in 2024 as an associate at Amazon.ae. 
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-4">
+  Life was going okay and saturated untill i met with a small accident to my spine which made standing and weight lifting job a nightmare. Which forced me to resign and came back to my home country.
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-4">
+  That had me thinking about the jobs that dont need standing for long hours and got into digital marketing. as I was doing that my childhood friend (who always motivates me about my design skills but never took it serious) gave me the words one last time : "You are good at designing"
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-4">
+  I found Google's UX course on coursera and decided to go for it. That was the literal turning point of my life. I finally discovered my passion. And here I'am. As a UI UX designer.
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-4">
+  Now after 4 months of learning UI UX I felt an incompleteness. So i tried to study what i dont knew but needed for a UX designer.
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-8">
+  Combining my past design knowledge and recent learning, my arsenal currently has:
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-4">
+  Designing - Photoshop, Figma, Sketch, Adobe XD, Canva.
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-4">
+  Video Editing - Adobe AE, Capcut.
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-4">
+  Low Coding - Framer, Webflow, Quarkly.
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-700 mb-8">
+  Coding - Html, CSS, JS, Tailwind CSS,VS code,React.
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-500 mb-8">
+  With all this tools and skills I earned from my experience, I'm very confident and passionate that I can design.
+</p>
+
+<p class="max-w-2xl text-lg leading-relaxed text-left text-gray-500 mb-8">
+  Thank you for Reading...
+</p>
+
+
+
+
+<!-- Logo Slider Section -->
+<div class="w-full overflow-hidden py-8">
+  <div class="flex animate-scroll gap-12">
+    
+    <!-- Example Logos (replace with your own images) -->
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755350380/Figma_yye5u7.svg" class="h-20" alt="Figma">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755350380/Xd_f7bnqf.svg" class="h-20" alt="Adobe XD">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755350380/Sketch_blesrl.svg" class="h-20" alt="Sketch">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755350380/PS_utenel.svg" class="h-20" alt="Photoshop">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755350379/Low_Code_rpbh6f.svg" class="h-20" alt="Coding">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437597/framer-svgrepo-com_1_h5tczi.svg" class="h-20" alt="Framer">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437597/html5-01-svgrepo-com_1_v1vbws.svg" class="h-20" alt="HTML">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437597/tailwind-svgrepo-com_1_iuoxtp.svg" class="h-20" alt="Tailwind">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437598/visual-studio-code-svgrepo-com_1_ecfhgh.svg" class="h-20" alt="VS Code">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437598/webflow-svgrepo-com_1_c1tclu.svg" class="h-20" alt="Webflow">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437598/canva-svgrepo-com_1_tmjaqy.svg" class="h-20" alt="Canva">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437599/capcut-svgrepo-com_1_hbydug.svg" class="h-20" alt="Capcut">
+
+    <!-- Repeat logos for seamless loop -->
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755350380/Figma_yye5u7.svg" class="h-20" alt="Figma">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755350380/Xd_f7bnqf.svg" class="h-20" alt="Adobe XD">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755350380/Sketch_blesrl.svg" class="h-20" alt="Sketch">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755350380/PS_utenel.svg" class="h-20" alt="Photoshop">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755350379/Low_Code_rpbh6f.svg" class="h-20" alt="Coding">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437597/framer-svgrepo-com_1_h5tczi.svg" class="h-20" alt="Framer">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437597/html5-01-svgrepo-com_1_v1vbws.svg" class="h-20" alt="HTML">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437597/tailwind-svgrepo-com_1_iuoxtp.svg" class="h-20" alt="Tailwind">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437598/visual-studio-code-svgrepo-com_1_ecfhgh.svg" class="h-20" alt="VS Code">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437598/webflow-svgrepo-com_1_c1tclu.svg" class="h-20" alt="Webflow">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437598/canva-svgrepo-com_1_tmjaqy.svg" class="h-20" alt="Canva">
+    <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755437599/capcut-svgrepo-com_1_hbydug.svg" class="h-20" alt="Capcut">
+
+  </div>
+</div>
+
+<style>
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-scroll {
+  display: flex;
+  width: max-content;
+  animation: scroll 25s linear infinite;
+}
+</style>
+
+
+
+
+
+
+
+    <div class="mb-12 text-center">
+      <h2 class="text-2xl font-family text-gray-700 mb-4">Areas of Expertise</h2>
+      <p class="inline-block space-x-4">
+        <span class="inline-block px-2 py-1 bg-white rounded shadow text-sm">UX Design</span>
+        <span class="inline-block px-2 py-1 bg-white rounded shadow text-sm">Accessibility</span>
+        <span class="inline-block px-2 py-1 bg-white rounded shadow text-sm">Design Systems</span>
+      </p>
+    </div>
+
+    
+
+    <!-- Social Icons -->
+    <div class="flex justify-center gap-4 mb-4">
+      <!-- Linked In -->
+      <a href="https://www.linkedin.com/in/amal-anilkumar-ux/" target="_blank">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755429423/5279114_linkedin_network_social_network_linkedin_logo_icon_1_nlr49z_1_z1h49l.svg" alt="Linkedin" class="h-6 w-6">
+      </a>
+
+      <!-- Behance -->
+      <a href="https://www.behance.net/amalux" target="_blank">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755429423/104426_behance_portfolio_icon_1_o5dksy.svg" alt="Behance" class="h-6 w-6">
+      </a>
+
+      <!-- Telegram -->
+      <a href="https://t.me/amalux2025" target="_blank">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755429423/4875780_telegram_icon_1_rsn6ur.svg" alt="Telegram" class="h-6 w-6">
+      </a>
+
+      <!-- Profile -->
+      <a href="mailto:heyamalux@gmail.com" target="_blank">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755429423/4550857_email_gmail_mail_sending_yahoo_icon_1_weg8mj.svg" alt="Gmail" class="h-6 w-6">
+      </a>
+    </div>  
+
+    <!-- Centered Back Button with Adjustable Top Margin, Opens in New Tab -->
+<div class="w-full flex justify-center mt-8 mb-8">
+  <a href="index.html"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="inline-block px-4 py-2 bg-gray-100 rounded shadow hover:bg-gray-200 text-black font-light transition-colors duration-200">
+     ← Back to Home
+  </a>
+</div>
+
+  <footer class="text-sm text-gray-500 text-center py-4">
+    &copy; 2025 · Amal Anilkumar
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const closeX = document.getElementById('close-x');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+    function openSidebar() {
+      sidebarOverlay.classList.remove('opacity-0', 'invisible');
+      sidebar.classList.add('sidebar-enter-active');
+      sidebar.classList.remove('sidebar-enter');
+      hamburger.classList.add('hamburger-open');
+    }
+
+    function closeSidebarMenu() {
+      sidebarOverlay.classList.add('opacity-0', 'invisible');
+      sidebar.classList.remove('sidebar-enter-active');
+      sidebar.classList.add('sidebar-enter');
+      hamburger.classList.remove('hamburger-open');
+    }
+
+    hamburger.addEventListener('click', () => {
+      if (hamburger.classList.contains('hamburger-open')) {
+        closeSidebarMenu();
+      } else {
+        openSidebar();
+      }
+    });
+
+    closeX.addEventListener('click', closeSidebarMenu);
+    sidebarOverlay.addEventListener('click', (e) => {
+      if (e.target === sidebarOverlay) closeSidebarMenu();
+    });
+    sidebarLinks.forEach(link => link.addEventListener('click', closeSidebarMenu));
+  </script>
+
+</body>
+</html>
