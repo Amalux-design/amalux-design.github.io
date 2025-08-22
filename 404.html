@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 | Page Not Found</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Simple solid-text flicker */
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0; }
+    }
+    .flicker {
+      animation: flicker 2.5s infinite;
+    }
+  </style>
+</head>
+<body class="bg-black text-white flex items-center justify-center h-screen">
+  <div class="text-center px-6">
+    <!-- Flickering 404 -->
+    <h1 class="text-9xl font-medium text-[#e0b868] flicker">
+      404
+    </h1>
+
+    <!-- Subtitle -->
+    <p class="mt-4 text-xl text-gray-300">
+      Oops! Looks like the lights are out.
+    </p>
+
+    <!-- Home button -->
+    <a href="https://amalanilkumar.in/" 
+       class="mt-6 inline-block px-8 py-3 text-gray-200 hover:text-[#e0b868] rounded-2xl shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+      Back to Home
+    </a>
+    
+  </div>
+</body>
+</html>
