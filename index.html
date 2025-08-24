@@ -706,10 +706,45 @@
   <div class="md:col-span-2 text-left pl-4 sm:pl-8 md:pl-12 order-2 md:order-1">
     <h1 class="text-4xl sm:text-5xl md:text-7xl font-medium mb-2 leading-tight text-black">Amal Anilkumar</h1>
     <p class="text-lg sm:text-xl md:text-2xl text-black mb-6 md:mb-8">UI/UX Designer & Developer</p>
-    <a href="https://drive.google.com/file/d/15zAVDqD3zqreq_JdDuHfhI3rT9zq3OYH/view?usp=sharing" download 
-       class="text-black hover:underline transition-all text-sm sm:text-base text-left font-light">
-      Download my resume >>
-    </a>
+    <a class="resume-link hover:underline " 
+   href="https://drive.google.com/file/d/15zAVDqD3zqreq_JdDuHfhI3rT9zq3OYH/view?usp=sharing" 
+   target="_blank" 
+   rel="noopener noreferrer">
+  Download my resume <span class="chevrons">>></span>
+</a>
+
+
+<style>
+  .resume-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-family: "Andale Mono", monospace;
+    font-weight: 500; /* change this (100–900) for different weights */
+    font-size: 1rem;
+    color: #000; /* black */
+    text-decoration: none;
+  }
+
+  .chevrons {
+    display: inline-block;
+    animation: slidefade 1.2s ease-in-out infinite;
+  }
+
+  @keyframes slidefade {
+    0%   { transform: translateX(0); opacity: .35; }
+    50%  { transform: translateX(4px); opacity: 1; }
+    100% { transform: translateX(8px); opacity: 0; }
+  }
+
+  /* Faster on hover (optional) */
+  .resume-link:hover .chevrons { animation-duration: .7s; }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .chevrons { animation: none; opacity: 1; transform: none; }
+  }
+</style>
   </div>
   
   <!-- Right Column -->
@@ -806,14 +841,33 @@
     <p class="font-medium">2 Months</p>
   </div>
 </div>
-
-
             <a href="https://www.behance.net/gallery/231556413/Trail-Back-A-Navigation-App"
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="inline-block mt-6 text-[#e0b868] hover:underline font-medium">
-            Learn more >>
-            </a>
+      target="_blank" 
+      rel="noopener noreferrer"
+      class="inline-block mt-6 text-[#e0b868] hover:underline font-medium">
+      Learn more <span class="chevrons">>></span>
+    </a>
+
+<style>
+  .chevrons {
+    display: inline-block;
+    animation: slidefade 1.2s ease-in-out infinite;
+  }
+
+  @keyframes slidefade {
+    0%   { transform: translateX(0); opacity: .35; }
+    50%  { transform: translateX(4px); opacity: 1; }
+    100% { transform: translateX(8px); opacity: 0; }
+  }
+
+  /* Faster on hover (optional) */
+  a:hover .chevrons { animation-duration: .7s; }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .chevrons { animation: none; opacity: 1; transform: none; }
+  }
+</style>
       </div>
       
     </div>
@@ -867,11 +921,32 @@
         </div>
 
         <a href="https://www.behance.net/gallery/230428579/IRCTC-Website-Redesign-UIUX-Design"
-           target="_blank" 
-            rel="noopener noreferrer"
-            class="inline-block mt-6 text-[#213C6B] hover:underline font-medium">
-            Learn more >>
-            </a>
+   target="_blank" 
+   rel="noopener noreferrer"
+   class="inline-block mt-6 text-[#213C6B] hover:underline font-medium">
+   Learn more <span class="chevrons">>></span>
+</a>
+
+<style>
+  .chevrons {
+    display: inline-block;
+    animation: slidefade 1.2s ease-in-out infinite;
+  }
+
+  @keyframes slidefade {
+    0%   { transform: translateX(0); opacity: .35; }
+    50%  { transform: translateX(4px); opacity: 1; }
+    100% { transform: translateX(8px); opacity: 0; }
+  }
+
+  /* Speed up on hover */
+  a:hover .chevrons { animation-duration: .7s; }
+
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .chevrons { animation: none; opacity: 1; transform: none; }
+  }
+</style>
       </div>
       
     </div>
@@ -1164,6 +1239,7 @@
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96ff44ff75192fe5',t:'MTc1NTMyOTg3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
 
