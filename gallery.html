@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amal Anilkumar │ Digital Art Gallery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    
+    /* Sidebar slide animation */
+    .sidebar-enter {
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+    .sidebar-enter-active {
+      transform: translateY(0);
+      transition: transform 0.3s ease;
+    }
+    /* Hamburger animation */
+    .hamburger-open #line1 {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger-open #line2 {
+      opacity: 0;
+    }
+    .hamburger-open #line3 {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+
+    
+        @import url('https://fonts.googleapis.com/css2?family=Andale+Mono&display=swap');
+        
+        body {
+            font-family: 'Andale Mono', monospace;
+        }
+        
+        .gallery-image {
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+        
+        .modal {
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+
+
+  <!-- Your content goes here -->
+  
+</section>
+</head>
+<!-- Main Content -->
+  <div class="min-h-screen flex flex-col items-center justify-start py-16 px-4">
+  <h1 class="text-4xl font-family mb-6 text-center">
+    Digital Art Gallery
+  </h1>
+  <p class="max-w-2xl leading-relaxed text-left text-gray-500 mb-4">
+    Here i post all my works regardless of category.
+  </p>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Fixed Header -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-50">
+    <div class="flex justify-end items-center px-4 sm:px-6 py-3 sm:py-4">
+      <button id="hamburger" class="flex flex-col space-y-1 cursor-pointer w-6 h-6 justify-center items-center">
+        <div id="line1" class="hamburger-line w-5 sm:w-6 h-0.5 bg-[#e0b868]  transition-all duration-300"></div>
+        <div id="line2" class="hamburger-line w-5 sm:w-6 h-0.5 bg-[#e0b868]  transition-all duration-300"></div>
+        <div id="line3" class="hamburger-line w-5 sm:w-6 h-0.5 bg-[#e0b868]  transition-all duration-300"></div>
+      </button>
+    </div>
+  </header>
+
+  <!-- Sidebar Navigation -->
+  <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-[9999] opacity-0 invisible transition-opacity duration-300">
+    <nav id="sidebar" class="fixed top-0 left-0 right-0 h-60 sm:h-76 bg-white z-[10000] sidebar-enter">
+      <div class="p-4 sm:p-6">
+        <div class="flex justify-between items-center mb-6 sm:mb-8">
+          <a href="index.html" class="text-lg sm:text-xl font-light hover:text-[#e0b868] text-black">
+            Amal Anilkumar
+          </a>
+          <button id="close-x" class="text-black hover:text-[#e0b868] transition-colors cursor-pointer">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <ul class="space-y-4 sm:space-y-6 text-right">
+          <li><a href="index.html" class="block text-base sm:text-lg hover:text-[#e0b868] transition-colors sidebar-link text-black">Home</a></li>
+          <li><a href="about.html" class="block text-base sm:text-lg hover:text-[#e0b868] transition-colors sidebar-link text-black">About</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+    <!-- Gallery Grid -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0">
+            <!-- Gallery Images -->
+            <div class="aspect-square bg-white overflow-hidden cursor-pointer" onclick="openModal('https://res.cloudinary.com/dgxb8m8lr/image/upload/v1754731207/Bride_2_hyvrvj.webp', 'Abstract Composition #1 - A vibrant exploration of color and form')">
+                <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1754731207/Bride_2_hyvrvj.webp" alt="Abstract Art 1" class="w-full h-full object-cover gallery-image">
+            </div>
+            
+            <div class="aspect-square bg-white overflow-hidden cursor-pointer" onclick="openModal('https://res.cloudinary.com/dgxb8m8lr/image/upload/v1754731208/Bride_3_fhva77.webp', 'Digital Portrait - Modern interpretation of classical portraiture')">
+                <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1754731208/Bride_3_fhva77.webp" alt="Digital Portrait" class="w-full h-full object-cover gallery-image">
+            </div>
+            
+            <div class="aspect-square bg-white overflow-hidden cursor-pointer" onclick="openModal('https://res.cloudinary.com/dgxb8m8lr/image/upload/v1754731208/Bride_4_vtrygx.webp', 'Landscape Study - Minimalist approach to natural forms')">
+                <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1754731208/Bride_4_vtrygx.webp" alt="Landscape Study" class="w-full h-full object-cover gallery-image">
+            </div>
+            
+            <div class="aspect-square bg-white overflow-hidden cursor-pointer" onclick="openModal('https://res.cloudinary.com/dgxb8m8lr/image/upload/v1754731208/Bride_1_waunpl.webp', 'Geometric Forms - Exploring symmetry and balance')">
+                <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1754731208/Bride_1_waunpl.webp" alt="Geometric Forms" class="w-full h-full object-cover gallery-image">
+            </div>
+            
+            <div class="aspect-square bg-white overflow-hidden cursor-pointer" onclick="openModal('https://res.cloudinary.com/dgxb8m8lr/image/upload/v1754742832/download_2_mqno9w.jpg', 'Color Study - Experimental color relationships')">
+                <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1754742832/download_2_mqno9w.jpg" alt="Color Study" class="w-full h-full object-cover gallery-image">
+            </div>
+            
+            <div class="aspect-square bg-white overflow-hidden cursor-pointer" onclick="openModal('https://via.placeholder.com/600/85C1E9/FFFFFF?text=Urban+Scene', 'Urban Scene - Contemporary city life captured digitally')">
+                <img src="https://via.placeholder.com/600/85C1E9/FFFFFF?text=Urban+Scene" alt="Urban Scene" class="w-full h-full object-cover gallery-image">
+            </div>
+            
+            <div class="aspect-square bg-white overflow-hidden cursor-pointer" onclick="openModal('https://via.placeholder.com/600/F8C471/000000?text=Nature+Abstract', 'Nature Abstract - Organic forms in digital medium')">
+                <img src="https://via.placeholder.com/600/F8C471/000000?text=Nature+Abstract" alt="Nature Abstract" class="w-full h-full object-cover gallery-image">
+            </div>
+            
+            <div class="aspect-square bg-white overflow-hidden cursor-pointer" onclick="openModal('https://via.placeholder.com/600/82E0AA/FFFFFF?text=Minimalist+Design', 'Minimalist Design - Less is more philosophy')">
+                <img src="https://via.placeholder.com/600/82E0AA/FFFFFF?text=Minimalist+Design" alt="Minimalist Design" class="w-full h-full object-cover gallery-image">
+            </div>
+            
+            <div class="aspect-square bg-white overflow-hidden cursor-pointer" onclick="openModal('https://via.placeholder.com/600/F1948A/FFFFFF?text=Digital+Collage', 'Digital Collage - Mixed media exploration')">
+                <img src="https://via.placeholder.com/600/F1948A/FFFFFF?text=Digital+Collage" alt="Digital Collage" class="w-full h-full object-cover gallery-image">
+            </div>
+            
+            <div class="aspect-square bg-white overflow-hidden cursor-pointer" onclick="openModal('https://via.placeholder.com/600/AED6F1/000000?text=Conceptual+Art', 'Conceptual Art - Ideas made visual')">
+                <img src="https://via.placeholder.com/600/AED6F1/000000?text=Conceptual+Art" alt="Conceptual Art" class="w-full h-full object-cover gallery-image">
+            </div>
+            
+            <div class="aspect-square bg-white overflow-hidden cursor-pointer" onclick="openModal('https://via.placeholder.com/600/D7BDE2/FFFFFF?text=Texture+Study', 'Texture Study - Surface and depth exploration')">
+                <img src="https://via.placeholder.com/600/D7BDE2/FFFFFF?text=Texture+Study" alt="Texture Study" class="w-full h-full object-cover gallery-image">
+            </div>
+            
+            <div class="aspect-square bg-white overflow-hidden cursor-pointer" onclick="openModal('https://via.placeholder.com/600/A9DFBF/000000?text=Motion+Graphics', 'Motion Graphics - Static frame from animation')">
+                <img src="https://via.placeholder.com/600/A9DFBF/000000?text=Motion+Graphics" alt="Motion Graphics" class="w-full h-full object-cover gallery-image">
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 modal">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="relative bg-white shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden modal-content">
+                <!-- Close Button -->
+                <button onclick="closeModal()" class="absolute top-4 right-4 z-10 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-2 transition-all duration-200 shadow-lg">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                
+                <!-- Modal Content -->
+                <div class="flex flex-col">
+                    <div class="flex-shrink-0">
+                        <img id="modalImage" src="" alt="" class="w-full h-auto max-h-[70vh] object-contain">
+                    </div>
+                    <div class="p-6">
+                        <p id="modalCaption" class="text-gray-700 text-lg leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+<footer class="py-6 sm:py-8 px-4 sm:px-6" style="background-color: #f9fafb;">
+  <div class="text-center text-gray-100">
+    
+    <!-- Social Icons -->
+    <div class="flex justify-center gap-4 mb-4">
+      <!-- Linked In -->
+      <a href="https://www.instagram.com/amal.ux_?igsh=MXN5MnlsZjZxdnJjbQ==" target="_blank">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755931342/5279114_linkedin_network_social_network_linkedin_logo_icon_1_nlr49z_1_rzenaz.svg" alt="Linkedin" class="h-6 w-6">
+      </a>
+
+      <!-- Behance -->
+      <a href="https://www.behance.net/amalux" target="_blank">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755931342/104426_behance_portfolio_icon_1_bgafge.svg" alt="Behance" class="h-6 w-6">
+      </a>
+
+      <!-- Telegram -->
+      <a href="https://t.me/amalux2025" target="_blank">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755931341/4875780_telegram_icon_1_o7rrr8.svg" alt="Telegram" class="h-6 w-6">
+      </a>
+
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/amal.ux_?igsh=MXN5MnlsZjZxdnJjbQ==" target="_blank">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1755931551/Instagram_social_media_mf3vcz_1_maq1re.svg" alt="Instagram" class="h-6 w-6">
+      </a>
+    </div>
+
+    <!-- Copyright -->
+    <p class="text-sm text-gray-800 sm:text-base"> All rights reserved to Amal Anilkumar</p>
+  </div>
+</footer>
+
+    <script>
+
+
+    const hamburger = document.getElementById('hamburger');
+    const closeX = document.getElementById('close-x');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+    function openSidebar() {
+      sidebarOverlay.classList.remove('opacity-0', 'invisible');
+      sidebar.classList.add('sidebar-enter-active');
+      sidebar.classList.remove('sidebar-enter');
+      hamburger.classList.add('hamburger-open');
+    }
+
+    function closeSidebarMenu() {
+      sidebarOverlay.classList.add('opacity-0', 'invisible');
+      sidebar.classList.remove('sidebar-enter-active');
+      sidebar.classList.add('sidebar-enter');
+      hamburger.classList.remove('hamburger-open');
+    }
+
+    hamburger.addEventListener('click', () => {
+      if (hamburger.classList.contains('hamburger-open')) {
+        closeSidebarMenu();
+      } else {
+        openSidebar();
+      }
+    });
+
+    closeX.addEventListener('click', closeSidebarMenu);
+    sidebarOverlay.addEventListener('click', (e) => {
+      if (e.target === sidebarOverlay) closeSidebarMenu();
+    });
+    sidebarLinks.forEach(link => link.addEventListener('click', closeSidebarMenu));
+
+
+
+        function openModal(imageSrc, caption) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            
+            modalImage.src = imageSrc;
+            modalImage.alt = caption;
+            modalCaption.textContent = caption;
+            
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close modal when clicking outside the image
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97495fb083910fce',t:'MTc1NjEwNjkxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
