@@ -8,23 +8,18 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Sections (optional for single-page sites) -->
+  <!-- About Page -->
   <url>
-    <loc>https://amalanilkumar.in/#about</loc>
+    <loc>https://amalanilkumar.in/about</loc>
     <lastmod>2025-08-18</lastmod>
     <priority>0.8</priority>
   </url>
 
+  <!-- Gallery Page -->
   <url>
-    <loc>https://amalanilkumar.in/#projects</loc>
+    <loc>https://amalanilkumar.in/gallery</loc>
     <lastmod>2025-08-18</lastmod>
     <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://amalanilkumar.in/#contact</loc>
-    <lastmod>2025-08-18</lastmod>
-    <priority>0.7</priority>
   </url>
 
 </urlset>
