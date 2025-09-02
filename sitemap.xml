@@ -10,16 +10,17 @@
 
   <!-- About Page -->
   <url>
-    <loc>https://amalanilkumar.in/about</loc>
+    <loc>https://amalanilkumar.in/about.html</loc>
     <lastmod>2025-08-18</lastmod>
     <priority>0.8</priority>
   </url>
 
   <!-- Gallery Page -->
   <url>
-    <loc>https://amalanilkumar.in/gallery</loc>
+    <loc>https://amalanilkumar.in/gallery.html</loc>
     <lastmod>2025-08-18</lastmod>
     <priority>0.8</priority>
   </url>
 
 </urlset>
+
