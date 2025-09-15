@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amal Anilkumar │ Digital Art Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Andale+Mono&display=swap" rel="stylesheet">
 
     <!-- Favicon & Web App Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -11,9 +12,57 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <meta name="msapplication-TileColor" content="#e0b868">
     <meta name="theme-color" content="#e0b868">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+        .masonry-grid {
+            column-count: 4;
+            column-gap: 0.5rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .masonry-grid {
+                column-count: 3;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .masonry-grid {
+                column-count: 1;
+            }
+        }
+        
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+        
+        
+        
+        .modal {
+            backdrop-filter: blur(10px);
+        }
+        
+        .image-overlay {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.444) 40%, rgba(0, 0, 0, 0) 100%);
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Andale+Mono&display=swap');
+        
+        body {
+            font-family: 'Andale Mono', monospace;
+        }
+    </style>
+
+
+
+     <style>
     
     /* Sidebar slide animation */
     .sidebar-enter {
@@ -43,47 +92,20 @@
             font-family: 'Andale Mono', monospace;
         }
         
-        .gallery-image {
-            transition: transform 0.3s ease;
-        }
         
-        .gallery-image:hover {
-            transform: scale(1.05);
-        }
-        
-        .modal {
-            backdrop-filter: blur(5px);
-        }
-        
-        .modal-content {
-            animation: modalFadeIn 0.3s ease;
-        }
-        
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
     </style>
 
 
   <!-- Your content goes here -->
-  
-</section>
+ 
+
 </head>
 <!-- Main Content -->
   <div class="min-h-screen flex flex-col items-center justify-start py-16 px-4">
   <h1 class="text-4xl font-family mb-6 text-center">
     Digital Art Gallery
   </h1>
-  <p class="max-w-2xl leading-relaxed text-left text-gray-500 mb-4">
-    Here i post all my works regardless of category.
-  </p>
+  
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Fixed Header -->
@@ -119,59 +141,107 @@
     </nav>
   </div>
 
-    <!-- Gallery Grid -->
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-0">
     
-    <!-- Gallery Images -->
-    <div class="aspect-square bg-white overflow-hidden cursor-pointer" 
-         onclick="openModal('https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756108732/framrfedf_szmgai.jpg', 'Luxe Bride - Promotional Poster')">
-      <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756108732/framrfedf_szmgai.jpg" alt="Abstract Art 1" class="w-full h-full object-cover gallery-image">
-    </div>
-    
-    <div class="aspect-square bg-white overflow-hidden cursor-pointer" 
-         onclick="openModal('https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756108914/Synthite-peppervine-4_bui4bt.png', 'Synthite Realty - Promotional Poster')">
-      <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756108914/Synthite-peppervine-4_bui4bt.png" alt="Digital Portrait" class="w-full h-full object-cover gallery-image">
-    </div>
-    
-    <div class="aspect-square bg-white overflow-hidden cursor-pointer" 
-         onclick="openModal('https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756108920/jacob_s_mart_2__mh9l6a.jpg', 'Jacobs Mart - Promotional Poster')">
-      <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756108920/jacob_s_mart_2__mh9l6a.jpg" alt="Landscape Study" class="w-full h-full object-cover gallery-image">
-    </div>
-    
-    <div class="aspect-square bg-white overflow-hidden cursor-pointer" 
-         onclick="openModal('https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756108979/6021432_tm9m87.jpg', 'Cryptodecko - Promotional Poster')">
-      <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756108979/6021432_tm9m87.jpg" alt="Geometric Forms" class="w-full h-full object-cover gallery-image">
-    </div>
-    
-    <div class="aspect-square bg-white overflow-hidden cursor-pointer" 
-         onclick="openModal('https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756110847/image_vt9q6p.png', 'Luxe Bride - Website Design Development & Deployment - https://amalux-design.github.io/Luxe.Bride/')">
-      <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756110847/image_vt9q6p.png" alt="Color Study" class="w-full h-full object-cover gallery-image">
-    </div>
 
-  </div>
-</main>
+    <script>
+    const hamburger = document.getElementById('hamburger');
+    const closeX = document.getElementById('close-x');
+    const sidebar = document.getElementById('sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
 
+    function openSidebar() {
+      sidebarOverlay.classList.remove('opacity-0', 'invisible');
+      sidebar.classList.add('sidebar-enter-active');
+      sidebar.classList.remove('sidebar-enter');
+      hamburger.classList.add('hamburger-open');
+    }
+
+    function closeSidebarMenu() {
+      sidebarOverlay.classList.add('opacity-0', 'invisible');
+      sidebar.classList.remove('sidebar-enter-active');
+      sidebar.classList.add('sidebar-enter');
+      hamburger.classList.remove('hamburger-open');
+    }
+
+    hamburger.addEventListener('click', () => {
+      if (hamburger.classList.contains('hamburger-open')) {
+        closeSidebarMenu();
+      } else {
+        openSidebar();
+      }
+    });
+
+    closeX.addEventListener('click', closeSidebarMenu);
+    sidebarOverlay.addEventListener('click', (e) => {
+      if (e.target === sidebarOverlay) closeSidebarMenu();
+    });
+    sidebarLinks.forEach(link => link.addEventListener('click', closeSidebarMenu));
+
+    </script>
+  
+
+
+
+
+<!-- Main Content -->
+    <main class="pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <!-- Gallery Grid -->
+            <div class="masonry-grid">
+                <!-- Gallery Items -->
+                <div class="masonry-item gallery-item cursor-pointer group" data-title="Poster Design" data-description="Promotional Poster For LuxeBride">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756108732/framrfedf_szmgai.jpg" alt="Poster Design" class="w-full h-auto object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                        <div class="image-overlay absolute top-0 left-0 right-0 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="andale-mono text-white text-sm font-bold p-3">Promotional Poster For LuxeBride</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item gallery-item cursor-pointer group" data-title="Poster Design" data-description="Promotional Poster For Synthite">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756108914/Synthite-peppervine-4_bui4bt.png" alt="Nature Studies" class="w-full h-auto object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                        <div class="image-overlay absolute top-0 left-0 right-0 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="andale-mono text-white text-sm font-bold p-3">Promotional Poster For Synthite</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item gallery-item cursor-pointer group" data-title="Poster Design" data-description="Promotional Poster For Jacob's Mart">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756108920/jacob_s_mart_2__mh9l6a.jpg" alt="Abstract Forms" class="w-full h-auto object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                        <div class="image-overlay absolute top-0 left-0 right-0 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="andale-mono text-white text-sm font-bold p-3">Promotional Poster For Jacob's Mart</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="masonry-item gallery-item cursor-pointer group" data-title="Poster Design" data-description="Promotional Poster for Cryptodecko">
+                    <div class="relative overflow-hidden rounded-lg">
+                        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1756108979/6021432_tm9m87.jpg" alt="Minimalist Portraits" class="w-full h-auto object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+                        <div class="image-overlay absolute top-0 left-0 right-0 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="andale-mono text-white text-sm font-bold p-3">Promotional Poster for Cryptodecko</h3>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </main>
 
     <!-- Modal -->
-    <div id="imageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-75 modal">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="relative bg-white shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden modal-content">
-                <!-- Close Button -->
-                <button onclick="closeModal()" class="absolute top-4 right-4 z-10 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-2 transition-all duration-200 shadow-lg">
-                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div id="modal" class="modal fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none">
+        <div class="bg-white rounded-lg w-full max-w-4xl max-h-[95vh] overflow-auto flex flex-col">
+            <div class="relative flex-1">
+                <button id="closeModal" class="absolute top-4 right-4 z-10 w-8 h-8 bg-black/50 hover:bg-black/70 rounded-full flex items-center justify-center text-white transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
-                
-                <!-- Modal Content -->
-                <div class="flex flex-col">
-                    <div class="flex-shrink-0">
-                        <img id="modalImage" src="" alt="" class="w-full h-auto max-h-[70vh] object-contain">
-                    </div>
-                    <div class="p-6">
-                        <p id="modalCaption" class="text-gray-700 text-lg leading-relaxed"></p>
-                    </div>
+                <div id="modalContent" class="p-4 sm:p-6 lg:p-8">
+                    <!-- Modal content will be inserted here -->
                 </div>
             </div>
         </div>
@@ -211,75 +281,52 @@
 
     <script>
 
+    // Gallery modal functionality
+        const modal = document.getElementById('modal');
+        const modalContent = document.getElementById('modalContent');
+        const closeModal = document.getElementById('closeModal');
+        const galleryItems = document.querySelectorAll('.gallery-item');
 
-    const hamburger = document.getElementById('hamburger');
-    const closeX = document.getElementById('close-x');
-    const sidebar = document.getElementById('sidebar');
-    const sidebarOverlay = document.getElementById('sidebar-overlay');
-    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const title = item.dataset.title;
+                const description = item.dataset.description;
+                const img = item.querySelector('img').cloneNode(true);
+                
+                // Update image classes for modal display
+                img.className = 'w-full h-auto object-contain rounded-lg mb-6';
+                img.style.maxHeight = '70vh';
 
-    function openSidebar() {
-      sidebarOverlay.classList.remove('opacity-0', 'invisible');
-      sidebar.classList.add('sidebar-enter-active');
-      sidebar.classList.remove('sidebar-enter');
-      hamburger.classList.add('hamburger-open');
-    }
+                modalContent.innerHTML = `
+                    <div class="flex flex-col items-center">
+                        ${img.outerHTML}
+                        <div class="w-full max-w-2xl text-center">
+                            <h2 class="andale-mono text-2xl sm:text-3xl font-bold mb-4">${title}</h2>
+                            <p class="text-gray-700 leading-relaxed text-base sm:text-lg">${description}</p>
+                        </div>
+                    </div>
+                `;
 
-    function closeSidebarMenu() {
-      sidebarOverlay.classList.add('opacity-0', 'invisible');
-      sidebar.classList.remove('sidebar-enter-active');
-      sidebar.classList.add('sidebar-enter');
-      hamburger.classList.remove('hamburger-open');
-    }
-
-    hamburger.addEventListener('click', () => {
-      if (hamburger.classList.contains('hamburger-open')) {
-        closeSidebarMenu();
-      } else {
-        openSidebar();
-      }
-    });
-
-    closeX.addEventListener('click', closeSidebarMenu);
-    sidebarOverlay.addEventListener('click', (e) => {
-      if (e.target === sidebarOverlay) closeSidebarMenu();
-    });
-    sidebarLinks.forEach(link => link.addEventListener('click', closeSidebarMenu));
-
-
-
-        function openModal(imageSrc, caption) {
-            const modal = document.getElementById('imageModal');
-            const modalImage = document.getElementById('modalImage');
-            const modalCaption = document.getElementById('modalCaption');
-            
-            modalImage.src = imageSrc;
-            modalImage.alt = caption;
-            modalCaption.textContent = caption;
-            
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.classList.add('hidden');
+                modal.style.opacity = '1';
+                modal.style.pointerEvents = 'auto';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+        closeModal.addEventListener('click', () => {
+            modal.style.opacity = '0';
+            modal.style.pointerEvents = 'none';
             document.body.style.overflow = 'auto';
-        }
-        
-        // Close modal when clicking outside the image
-        document.getElementById('imageModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.opacity = '0';
+                modal.style.pointerEvents = 'none';
+                document.body.style.overflow = 'auto';
             }
         });
-        
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        });
+
+
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97495fb083910fce',t:'MTc1NjEwNjkxOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97f5c3f103522fe5',t:'MTc1NzkxNDU3NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
