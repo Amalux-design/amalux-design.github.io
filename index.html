@@ -1289,6 +1289,221 @@
 </script>
 
 
+    <!-- 🦖 T-Rex Game Section (Auto-Restart, Clean, No Clouds) -->
+<section id="trex-section" style="padding:40px 0; background:#B097BE; color:#000;">
+  <style>
+    #trex-section .wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Canvas styling */
+    #trex-section canvas {
+      background: #B097BE !important;
+      border-radius: 8px;
+      width: 100%;
+      height: auto;
+      max-width: 800px;
+      max-height: 200px;
+      touch-action: none;
+      border: 1px solid #B097BE;
+    }
+
+    #trex-section .controls { 
+      margin-top: 16px;
+      text-align: center;
+      color: #222;
+      font-size: clamp(13px, 2vw, 16px);
+      line-height: 1.6;
+    }
+
+    #trex-section .controls strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    #trex-section .controls small {
+      display: block;
+      color: #555;
+      margin-top: 6px;
+    }
+  </style>
+
+  <div class="wrap">
+    <canvas id="trex-game"></canvas>
+    <div class="controls">
+      <strong>Controls:</strong>
+      Space / ↑ to jump, ↓ to duck. Touch to jump.
+      <small>High score is saved locally.</small>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('trex-game');
+    const ctx = canvas.getContext('2d');
+    let W, H, scale;
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      W = rect.width;
+      H = rect.height || rect.width * 0.25;
+      const DPR = window.devicePixelRatio || 1;
+      canvas.width = W * DPR;
+      canvas.height = H * DPR;
+      ctx.scale(DPR, DPR);
+      scale = W / 800;
+    }
+    window.addEventListener('resize', resizeCanvas);
+
+    let lastTime = 0, speed = 6, gravity = 0.6, gameOver = false, score = 0, blinkTimer = 0;
+    let highScore = Number(localStorage.getItem('trex_high') || 0);
+    const baseH = 200;
+    const player = {x:60,y:baseH-44,w:44,h:44,vy:0,jumping:false,ducking:false,y0:baseH-44};
+    let groundOffset=0, obstacles=[], spawnTimer=0;
+
+    function resetGame() {
+      speed=6; score=0; gameOver=false;
+      obstacles=[]; spawnTimer=0; blinkTimer=0;
+      player.y=player.y0; player.vy=0; player.jumping=false; player.ducking=false;
+    }
+
+    function rand(a,b){return Math.random()*(b-a)+a;}
+
+    function addObstacle(){
+      const type=Math.random()<0.2?'ptero':'cactus';
+      if(type==='cactus'){
+        const h=[24,36,48][Math.floor(Math.random()*3)];
+        obstacles.push({type:'cactus',x:800+60,w:22,h,y:baseH-h-12});
+      } else {
+        const yOpt=[baseH-120,baseH-88,baseH-64];
+        obstacles.push({type:'ptero',x:800+60,w:46,h:30,y:yOpt[Math.floor(Math.random()*3)],bob:Math.random()*Math.PI});
+      }
+    }
+
+    function update(dt){
+      if(gameOver){ blinkTimer += dt; return; }
+      speed+=dt*0.0015;
+      if(player.jumping){
+        player.vy+=gravity;
+        player.y+=player.vy;
+        if(player.y>=player.y0){player.y=player.y0;player.vy=0;player.jumping=false;}
+      }
+      player.h=player.ducking&&!player.jumping?28:44;
+      groundOffset=(groundOffset-speed)%40;
+      spawnTimer-=dt;
+      if(spawnTimer<=0){addObstacle();spawnTimer=rand(900,1500)-Math.min(score*2,600);}
+      for(let i=obstacles.length-1;i>=0;i--){
+        const o=obstacles[i];
+        o.x-=speed;
+        if(o.type==='ptero')o.bob+=dt*0.01;
+        if(o.x+o.w<-20)obstacles.splice(i,1);
+        const px=player.x,py=player.y+(player.h===28?16:0),pW=player.w,pH=player.h;
+        if(px<o.x+o.w&&px+pW>o.x&&py<o.y+o.h&&py+pH>o.y){
+          gameOver=true;
+          if(score>highScore){highScore=Math.floor(score);localStorage.setItem('trex_high',highScore);}
+        }
+      }
+      score+=dt*0.01*speed;
+    }
+
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      const s=scale;
+      ctx.fillStyle='#fff';
+      ctx.fillRect(0,H-12*s,W,12*s);
+      for(let i=0;i<W/20;i++){
+        const x=(i*20+groundOffset*s)%W;
+        ctx.fillStyle='#d9d9d9';
+        ctx.fillRect(x,H-12*s,12*s,4*s);
+      }
+
+      // Player
+      ctx.save();
+      ctx.translate(player.x*s,(player.y-player.h)*s);
+      ctx.fillStyle='#222';
+      ctx.fillRect(0,player.h*0.4*s,player.w*0.8*s,player.h*0.6*s);
+      ctx.fillRect(player.w*0.6*s,0,player.w*0.45*s,player.h*0.45*s);
+      ctx.beginPath();
+      ctx.moveTo(-6*s,player.h*0.6*s);
+      ctx.lineTo(-20*s,player.h*0.5*s);
+      ctx.lineTo(-6*s,player.h*0.45*s);
+      ctx.fill();
+      ctx.fillRect(player.w*0.2*s,player.h*0.95*s,8*s,10*s);
+      ctx.restore();
+
+      // Obstacles
+      for(const o of obstacles){
+        if(o.type==='cactus'){
+          ctx.fillStyle='#2b2b2b';
+          ctx.fillRect(o.x*s,o.y*s,o.w*s,o.h*s);
+          ctx.fillRect(o.x+o.w*0.6*s,o.y+o.h*0.3*s,6*s,12*s);
+        } else {
+          const by=Math.sin(o.bob)*6*s,ox=o.x*s,oy=o.y*s+by;
+          ctx.fillStyle='#202020';
+          ctx.beginPath();
+          ctx.moveTo(ox,oy+15*s);
+          ctx.lineTo(ox+20*s,oy);
+          ctx.lineTo(ox+46*s,oy+15*s);
+          ctx.lineTo(ox+28*s,oy+9*s);
+          ctx.lineTo(ox+12*s,oy+9*s);
+          ctx.closePath();
+          ctx.fill();
+        }
+      }
+
+      // Score
+      ctx.fillStyle='#333';
+      ctx.font=`${13*s}px system-ui,sans-serif`;
+      ctx.fillText('Score: '+Math.floor(score),W-140*s,28*s);
+      ctx.fillText('High: '+highScore,W-140*s,46*s);
+
+      // Blinking "Game Over"
+      if(gameOver){
+        const blink = Math.floor(blinkTimer / 400) % 2 === 0;
+        if(blink){
+          ctx.fillStyle='#000';
+          ctx.font=`${18*s}px system-ui`;
+          ctx.fillText('GAME OVER — Tap or Press Space to Restart', W/2 - 200*s, H/2);
+        }
+      }
+    }
+
+    function loop(t){
+      if(!lastTime)lastTime=t;
+      const dt=t-lastTime; lastTime=t;
+      update(dt); draw(); requestAnimationFrame(loop);
+    }
+
+    window.addEventListener('keydown',e=>{
+      if(e.code==='Space'||e.code==='ArrowUp'){
+        e.preventDefault();
+        if(gameOver){resetGame();return;}
+        if(!player.jumping){player.jumping=true;player.vy=-12;}
+      } else if(e.code==='ArrowDown'){
+        e.preventDefault();
+        if(!player.jumping)player.ducking=true;
+      }
+    });
+
+    window.addEventListener('keyup',e=>{if(e.code==='ArrowDown')player.ducking=false;});
+
+    canvas.addEventListener('touchstart',e=>{
+      e.preventDefault();
+      if(gameOver){resetGame();return;}
+      if(!player.jumping){player.jumping=true;player.vy=-12;}
+    },{passive:false});
+
+    resizeCanvas();
+    requestAnimationFrame(loop);
+  </script>
+</section>
+ 
+    
 
    <!-- Footer -->
 <footer class="py-6 sm:py-8 px-4 sm:px-6" style="background-color: #b097be;">
@@ -1380,3 +1595,4 @@
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96ff44ff75192fe5',t:'MTc1NTMyOTg3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
