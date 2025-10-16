@@ -1287,7 +1287,7 @@
 </script>
 
 
-   <!-- 🦖 Minimal T-Rex Game (Only Cactus Moving, No Ground) -->
+      <!-- 🦖 Minimal T-Rex Game (Only Cactus Moving, No Ground) -->
 <section id="trex-section" style="padding:40px 0; background:#B097BE; color:#000;">
   <style>
     #trex-section .wrap {
@@ -1357,109 +1357,131 @@
     }
     window.addEventListener('resize', resizeCanvas);
 
-    let lastTime = 0, speed = 6, gravity = 0.6, gameOver = false, score = 0, blinkTimer = 0;
+    let lastTime = 0, speed = 6, maxSpeed = 15, gravity = 0.6, gameOver = false, score = 0, blinkTimer = 0;
     let highScore = Number(localStorage.getItem('trex_high') || 0);
     const baseH = 200;
-    const player = {x:60,y:baseH-44,w:44,h:44,vy:0,jumping:false,y0:baseH-44};
-    let obstacles=[], spawnTimer=0;
+    const player = { x:60, y:baseH-44, w:44, h:44, vy:0, jumping:false, y0:baseH-44 };
+    let obstacles = [], spawnTimer = 0;
 
     function resetGame() {
-      speed=6; score=0; gameOver=false;
-      obstacles=[]; spawnTimer=0; blinkTimer=0;
-      player.y=player.y0; player.vy=0; player.jumping=false;
+      speed = 6; score = 0; gameOver = false;
+      obstacles = []; spawnTimer = 0; blinkTimer = 0;
+      player.y = player.y0; player.vy = 0; player.jumping = false;
     }
 
-    function rand(a,b){return Math.random()*(b-a)+a;}
+    function rand(a,b){ return Math.random()*(b-a)+a; }
 
     function addObstacle(){
-      const h=[24,36,48][Math.floor(Math.random()*3)];
-      obstacles.push({x:800+60,w:22,h,y:baseH-h});
+      const h = [24,36,48][Math.floor(Math.random()*3)];
+      obstacles.push({x:800+60, w:22, h, y:baseH-h});
     }
 
     function update(dt){
       if(gameOver){ blinkTimer += dt; return; }
-      speed+=dt*0.0015;
+
+      // Gradual speed increase, capped
+      speed += dt * 0.0003;
+      if(speed > maxSpeed) speed = maxSpeed;
+
+      // Player physics
       if(player.jumping){
-        player.vy+=gravity;
-        player.y+=player.vy;
-        if(player.y>=player.y0){player.y=player.y0;player.vy=0;player.jumping=false;}
+        player.vy += gravity;
+        player.y += player.vy;
+        if(player.y >= player.y0){ player.y = player.y0; player.vy = 0; player.jumping = false; }
       }
-      spawnTimer-=dt;
-      if(spawnTimer<=0){addObstacle();spawnTimer=rand(900,1500)-Math.min(score*2,600);}
+
+      // Spawn obstacles
+      spawnTimer -= dt;
+      if(spawnTimer <= 0){
+        addObstacle();
+        spawnTimer = rand(900,1500) - Math.min(score*1.2, 500);
+      }
+
+      // Obstacles & collision
       for(let i=obstacles.length-1;i>=0;i--){
-        const o=obstacles[i];
-        o.x-=speed;
-        if(o.x+o.w<-20)obstacles.splice(i,1);
-        const px=player.x,py=player.y,pW=player.w,pH=player.h;
-        if(px<o.x+o.w&&px+pW>o.x&&py<o.y+o.h&&py+pH>o.y){
-          gameOver=true;
-          if(score>highScore){highScore=Math.floor(score);localStorage.setItem('trex_high',highScore);}
+        const o = obstacles[i];
+        o.x -= speed;
+        if(o.x+o.w < -20) obstacles.splice(i,1);
+
+        // Adjusted collision box for Trex
+        const px = player.x + 5, py = player.y + 10, pW = player.w - 10, pH = player.h - 10;
+        if(px < o.x + o.w && px + pW > o.x && py < o.y + o.h && py + pH > o.y){
+          gameOver = true;
+          if(score > highScore){ highScore = Math.floor(score); localStorage.setItem('trex_high', highScore); }
         }
       }
-      score+=dt*0.01*speed;
+
+      score += dt * 0.008 * speed;
     }
 
     function draw(){
       ctx.clearRect(0,0,W,H);
-      const s=scale;
+      const s = scale;
 
       // Player
       ctx.save();
-      ctx.translate(player.x*s,(player.y-player.h)*s);
-      ctx.fillStyle='#222';
-      ctx.fillRect(0,player.h*0.4*s,player.w*0.8*s,player.h*0.6*s);
-      ctx.fillRect(player.w*0.6*s,0,player.w*0.45*s,player.h*0.45*s);
+      ctx.translate(player.x*s, (player.y-player.h)*s);
+      ctx.fillStyle = '#222';
+      ctx.fillRect(0, player.h*0.4*s, player.w*0.8*s, player.h*0.6*s);
+      ctx.fillRect(player.w*0.6*s, 0, player.w*0.45*s, player.h*0.45*s);
       ctx.beginPath();
-      ctx.moveTo(-6*s,player.h*0.6*s);
-      ctx.lineTo(-20*s,player.h*0.5*s);
-      ctx.lineTo(-6*s,player.h*0.45*s);
+      ctx.moveTo(-6*s, player.h*0.6*s);
+      ctx.lineTo(-20*s, player.h*0.5*s);
+      ctx.lineTo(-6*s, player.h*0.45*s);
       ctx.fill();
-      ctx.fillRect(player.w*0.2*s,player.h*0.95*s,8*s,10*s);
+      ctx.fillRect(player.w*0.2*s, player.h*0.95*s, 8*s, 10*s);
       ctx.restore();
 
-      // Cactus obstacles only
+      // Cactus obstacles
       for(const o of obstacles){
-        ctx.fillStyle='#2b2b2b';
-        ctx.fillRect(o.x*s,o.y*s,o.w*s,o.h*s);
-        ctx.fillRect(o.x+o.w*0.6*s,o.y+o.h*0.3*s,6*s,12*s);
+        ctx.fillStyle = '#2b2b2b';
+        ctx.fillRect(o.x*s, o.y*s, o.w*s, o.h*s);
+        ctx.fillRect(o.x+o.w*0.6*s, o.y+o.h*0.3*s, 6*s, 12*s);
       }
 
       // Score
-      ctx.fillStyle='#333';
-      ctx.font=`${13*s}px system-ui,sans-serif`;
-      ctx.fillText('Score: '+Math.floor(score),W-140*s,28*s);
-      ctx.fillText('High: '+highScore,W-140*s,46*s);
+      ctx.fillStyle = '#333';
+      ctx.font = `${13*s}px system-ui,sans-serif`;
+      ctx.fillText('Score: '+Math.floor(score), W-140*s, 28*s);
+      ctx.fillText('High: '+highScore, W-140*s, 46*s);
 
       // Game Over message
       if(gameOver){
         const blink = Math.floor(blinkTimer / 400) % 2 === 0;
         if(blink){
-          ctx.fillStyle='#000';
-          ctx.font=`${18*s}px system-ui`;
+          ctx.fillStyle = '#000';
+          ctx.font = `${18*s}px system-ui`;
           ctx.fillText('GAME OVER — Tap or Press Space to Restart', W/2 - 200*s, H/2);
         }
       }
     }
 
     function loop(t){
-      if(!lastTime)lastTime=t;
-      const dt=t-lastTime; lastTime=t;
-      update(dt); draw(); requestAnimationFrame(loop);
+      if(!lastTime) lastTime = t;
+      let dt = t - lastTime;
+      lastTime = t;
+
+      // Cap dt to avoid spikes
+      if(dt > 50) dt = 50;
+
+      update(dt);
+      draw();
+      requestAnimationFrame(loop);
     }
 
-    window.addEventListener('keydown',e=>{
+    window.addEventListener('keydown', e=>{
       if(e.code==='Space'||e.code==='ArrowUp'){
         e.preventDefault();
-        if(gameOver){resetGame();return;}
-        if(!player.jumping){player.jumping=true;player.vy=-12;}
+        if(gameOver){ resetGame(); return; }
+        if(!player.jumping){ player.jumping = true; player.vy=-12; }
       }
     });
 
-    canvas.addEventListener('touchstart',e=>{
+    canvas.addEventListener('touchstart', e=>{
       e.preventDefault();
-      if(gameOver){resetGame();return;}
-      if(!player.jumping){player.jumping=true;player.vy=-12;}
-    },{passive:false});
+      if(gameOver){ resetGame(); return; }
+      if(!player.jumping){ player.jumping = true; player.vy=-12; }
+    }, {passive:false});
 
     resizeCanvas();
     requestAnimationFrame(loop);
@@ -1620,6 +1642,7 @@
     
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96ff44ff75192fe5',t:'MTc1NTMyOTg3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
 
