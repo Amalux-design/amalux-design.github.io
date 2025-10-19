@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insta-Style - UI/UX Case Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: inherit;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .wide-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Typography */
+        h1 {
+            font-family: 'Lora', serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        h2 {
+            font-family: 'Lora', serif;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 500;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        h3 {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #2a2a2a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #2a2a2a;
+        }
+
+        p {
+            font-size: 1.125rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            color: #3a3a3a;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 60px 0;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-opener {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #555;
+            margin: 2rem 0;
+            line-height: 1.6;
+        }
+
+        /* Images */
+        .image-container {
+            margin: 3rem 0;
+            
+            overflow: hidden;
+        }
+
+        
+
+        .image-placeholder {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1rem;
+            
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* Cards */
+        .card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border-left: 4px solid #0077FF;
+        }
+
+        .quote-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote-card::before {
+            content: '"';
+            font-size: 4rem;
+            color: #0077FF;
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-family: serif;
+        }
+
+        .quote-author {
+            text-align: right;
+            font-weight: 600;
+            margin-top: 1rem;
+            font-style: normal;
+            color: #666;
+        }
+
+        /* Grid Layouts */
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .three-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        /* Lists */
+        .styled-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .styled-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .styled-list li::before {
+            content: counter(list-counter);
+            counter-increment: list-counter;
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            background: #0077FF;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .styled-list {
+            counter-reset: list-counter;
+        }
+
+        /* Persona Card */
+        .persona-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+        }
+
+        .persona-card h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .persona-details {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* Solution Callout */
+        .solution-callout {
+            background: #e8f5e8;
+            border: 2px solid #4caf50;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+        }
+
+        .solution-callout h4 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .metric-card {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0077FF;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #0077FF;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: #0056cc;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,119,255,0.3);
+        }
+
+        /* Hero Image Section */
+        .hero-image-section {
+            padding: 60px 0;
+            background: #fafbfc;
+        }
+
+        .hero-image-container {
+            margin: 0 auto;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(137, 137, 137, 0.15);
+            
+            
+        }
+
+        
+        .hero-image-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-image-caption {
+            text-align: center;
+            font-size: 1rem;
+            color: #666;
+            margin-top: 1.5rem;
+            font-style: italic;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 768px) {
+            .hero-image-placeholder {
+                height: 300px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+            background: #f8f9fa;
+            padding: 80px 0;
+        }
+
+        .contact p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* Accent Elements */
+        .accent-line {
+            width: 60px;
+            height: 4px;
+            background: #0077FF;
+            margin: 2rem auto;
+            border-radius: 2px;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero visible">
+    <style>
+        /* New CSS rule to align text left within the hero-content */
+        .hero-content {
+            text-align: left;
+        }
+    </style>
+    <div class="container">
+        <div class="hero-content">
+            <h1>UX Case study in simplyfing the user flow and reducing cart abandonment of 
+              <br><span style="color: #563AD1;">Insta-Style</span></h1>
+            <p class="subtitle"></p>
+        </div>
+    </div>
+</section>
+
+<section class="hero-image-section" style="padding:60px 0; background:#ffffff;">
+  <div class="container" style="max-width:680px; margin:0 auto; text-align:left;">
+    
+    <!-- Heading -->
+    <h2 style="font-size:2rem; font-weight:700; color:#222; margin-bottom:10px;">
+      About the Brand
+    </h2>
+    
+    <!-- Body / Description -->
+<p style="font-size:1.1rem; color:#666; margin-bottom:30px;">
+  <span style="color:#563AD1; font-weight:600;">Insta-Style</span> is a very popular, rapidly growing, trendy online fashion retailer targeting Gen Z and younger Millennials. Their website is sleek, modern, fully responsive, and looks great on all devices. They rely heavily on influencer marketing and fast-moving inventory.
+</p>
+
+    
+  </div>
+</section>
+
+
+    <!-- Hero Image -->
+<!-- Hero Video (Full-Width Background, Centered Video) -->
+<div style="width:100%; background-color:#563AD1; padding:60px 0; display:flex; justify-content:center; align-items:center;">
+  <div class="container" style="max-width:680px; width:100%; display:flex; justify-content:center; align-items:center;">
+    <video 
+      style="width:100%; max-width:680px; height:auto; display:block; object-fit:contain; border-radius:0; background-color:#563AD1;" 
+      autoplay 
+      muted 
+      playsinline
+      
+    >
+      <source src="https://res.cloudinary.com/dgxb8m8lr/video/upload/v1760793992/intro-purple_oifa2a.webm" type="video/webm">
+      
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</div>
+
+</section>
+
+
+
+
+   <!-- Problem Section -->
+<section id="problem" style="background:#f9f9f9; padding:60px 0;">
+    <div class="container">
+        <h2>The Problem</h2>
+        <p>
+            Insta-Style is losing 70% of potential sales at the crucial transition point between the Shopping Cart and the Final Payment page. Data shows that users frequently fail to proceed past the first step of the checkout process. The problem isn't the aesthetic; it's the flow and cognitive friction in the checkout process.
+        </p>
+        
+        <div class="image-container" style="width:100%; display:flex; justify-content:center; align-items:center; overflow:hidden;">
+            <img 
+                src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1760773602/Users_Remaining_vs._Funnel_Step_1_bolnk0_1_el76to.svg" 
+                alt="Current user journey visualization" 
+                style="width:100%; max-width:680px; height:auto; display:block; object-fit:contain;"
+            >
+        </div>     
+
+        <p>
+            The above chart clearly shows the huge drop of potential users abandoning their cart.
+        </p>
+    </div>
+</section>
+
+
+
+<!-- Problem Section -->
+    <section id="solution">
+        <div class="container">
+            <h2>Projected Reasons</h2>
+            <p>Data shows that users frequently fail to proceed past the first step of the checkout process, primarily due to "forced decision-making", "information overload" or "Confusion".
+The checkout is a multi-page flow that is technically modern but critically flawed in its structure and information architecture.</p>
+            
+            <div class="image-container" style="width:100%; display:flex; justify-content:center; align-items:center; overflow:hidden;">
+                <img 
+                    src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1760719559/Untitled_document_4_1_smetru.svg" 
+                    alt="Current user journey visualization" 
+                    style="width:100%; height:auto; display:block; object-fit:contain;">
+                </div>     
+            
+        </div>
+    </section>
+
+
+<!-- Persona Section -->
+<section id="persona" style="background:#f9f9f9; padding:60px 0;">
+    <div class="container">
+        <h2>Task Flow</h2>
+
+        <div class="two-column">
+            <div class="card">
+                <h4>Optimal Task Flow</h4>
+                <ol class="styled-list">
+                    <li>Find the product</li>
+                    <li>Check delivery availability by entering zip code</li>
+                    <li>Add to Cart</li>
+                    <li>Go to Cart and review order summary</li>
+                    <li>Choose “Log In/Register” or continue as a guest</li>
+                    <li>Enter shipping information and email (autofill where possible)</li>
+                    <li>Complete payment</li>
+                    <li>Post-order step (optional): Guest users are prompted to create an account with email & password</li>
+                    <li>View order confirmation and tracking details</li>
+                </ol>
+            </div>
+            <div class="card">
+                <h4>Current Task Flow</h4>
+                <ol class="styled-list">
+                    <li>Find a product</li>
+                    <li>Add to cart</li>
+                    <li>View cart</li>
+                    <li>Initiate checkout</li>
+                    <li>Account Decision (Login / Register)</li>
+                    <li>Select Shipping</li>
+                    <li>Input Payment Type</li>
+                    <li>Review & Buy</li>
+                    <li>Receive Confirmation</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Testing Section -->
+    <section id="testing">
+        <div class="container">
+            <h2>Usability Testing</h2>
+            <p>I conducted quick usability tests with 3 participants to understand pain points in their current shopping workflow.</p>
+
+            <h3>Test Scenarios</h3>
+            <ol class="styled-list">
+                <li>Search for a product and add it to cart</li>
+                <li>Check the product quantity and proceed to buy</li>
+                <li>Encounter the Checkout Gate</li>
+                <li>Attempt to Create an Account</li>
+                <li>Fill the required address form</li>
+                <li>Proceed to the Next Step and check the price</li>
+                <li>Fill the card details and place the order</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Affinity Map Section -->
+    <section id="affinity">
+  <div class="container">
+    <h2>Affinity Map & Pain Points</h2>
+
+    <div class="image-container" style="overflow:hidden; display:flex; justify-content:center; align-items:center; background:#ffffff;">
+      <img 
+        src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1760773034/affinitymap_xami2v.svg" 
+        alt="Affinity mapping results from user testing"
+        style="width:100%; max-width:680px; height:auto; display:block; object-fit:contain;"
+      >
+    </div>
+  </div>
+</section>
+
+
+
+
+
+            <!-- Notes Section -->
+<section id="notes-testing" style="padding:60px 0; background:#fff;">
+  <div class="container">
+    <h3>Notes from Usability Testing</h3>
+
+    <div class="card">
+  <p>
+    <strong>Key Finding:</strong><br>
+    1. High Friction at Initial Checkout Gate 66.7%<br>
+    2. Lack of Cost Transparency<br>
+    3. Flow and Layout Overload
+  </p>
+</div>
+
+
+    <div class="three-column">
+      <div class="card">
+  <h4>High Friction at Initial Checkout Gate</h4>
+
+  <p>
+    <strong>Forced Account Decision:</strong> Users were immediately confronted with large Login/Registration forms at the start of checkout, feeling the site was prioritizing data collection over the immediate transaction.
+  </p>
+  <p>
+    <strong>Checkout as Guest:</strong>This option is more used by new visitors and casual shoppers.
+  </p>
+</div>
+
+
+<div class="card">
+  <h4>Cognitive Overload</h4>
+
+  <p>
+    <strong>Missing Guidance:</strong>The checkout lacks a progress indicator, leading to uncertainty and cognitive overload
+  </p>
+  <p>
+    <strong>Poor Form Design:</strong> Lack of features like address autofill, making data entry tedious.
+   </p>
+    <strong>Trust Deficits:</strong> The payment screen lacked prominent security badges and a sticky, final order review, increasing user hesitation.
+</div>
+
+</div>
+<div class="card">
+  
+    <h4><strong>Lack of Transparency</strong></h4>
+    <p>
+    <strong>Missing Guidance:</strong> The website requires the user's full address before displaying shipping costs, causing "sticker shock" when unexpected fees were finally revealed on the next screen.
+    </p>
+</div>
+  </div>
+</section>
+
+
+    <!-- Solution Section -->
+<section id="solution" style="background-color:#f9f9f9; padding:60px 0;">
+  <div class="container" style="max-width:1000px; margin:auto;">
+
+    <h2 style="text-align:center; margin-bottom:50px;">Crafting the Solution</h2>
+
+    <!-- Lo-Fi Sketches -->
+    <div style="margin-bottom:70px;">
+      <h3 style="margin-bottom:20px;">Lo-Fi Sketches</h3>
+      <div class="image-container" style="overflow:hidden; display:flex; justify-content:center; align-items:center; background:#f9f9f9;">
+        <img 
+          src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1760813803/Gemini_Generated_Image_2uhd2i2uhd2i2uhd_ytrcdu.png" 
+          alt="High-fidelity mockups showing the redesigned interface"
+          style="width:100%; height:auto; display:block;  object-fit:contain;"
+        >
+      </div>
+      <p style="margin-bottom:30px;">I started with rapid sketching the login page, cart, and the product page.</p>
+
+      <div class="solution-callout" style="background:#fff; padding:25px 30px; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.08);">
+        <h4 style="margin-bottom:15px;">Proposed Solution Changes</h4>
+        <ul style="padding-left:30px; margin:0;"> 
+          <li>Add Guest checkout option.</li>
+          <li>Post-Purchase Account Creation.</li>
+          <li>Sticky, Real-Time Order Summary.</li>
+          <li>Clear, Visible Progress Tracker.</li>
+          <li>Smart Forms & Autocomplet.</li>
+          <li>Prominent Trust Signals.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Hi-Fi Mockups -->
+    <div style="margin-bottom:70px;">
+      <h3 style="margin-bottom:20px;">PRODUCT PAGE</h3>
+      <p>The product page after incorporating optimum measures.</p>
+      <div class="image-container" style="overflow:hidden; display:flex; justify-content:center; align-items:center; background:#f9f9f9;">
+        <img 
+          src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1760806832/frame_fg1kz8.jpg" 
+          alt="High-fidelity mockups showing the redesigned interface"
+          style="width:100%; height:auto; display:block;  object-fit:contain;"
+        >
+      </div>
+      
+    </div>
+
+    <!-- Cart screen -->
+    <div>
+      <h3 style="margin-bottom:20px;">Cart Page</h3>
+      <p>New cart page is easy for the users.</p>
+      <div class="image-container" style="overflow:hidden; display:flex; justify-content:center; align-items:center; background:#f9f9f9;">
+        <img 
+          src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1760811899/Desktop_-_6_nfma80.jpg" 
+          alt="High-fidelity mockups showing the redesigned interface"
+          style="width:100%; height:auto; display:block;  object-fit:contain;"
+        >
+      </div>
+      
+    </div>
+    
+    <!-- Payment screen -->
+    <div>
+      <h3 style="margin-bottom:20px;">Address and Payment Screen</h3>
+      <p>A step by step progressive chekout page.</p>
+      <div class="image-container" style="overflow:hidden; display:flex; justify-content:center; align-items:center; background:#f9f9f9;">
+        <img 
+          src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1760869244/Desktop_-_22_olwwus.png" 
+          alt="High-fidelity mockups showing the redesigned interface"
+          style="width:100%; height:auto; display:block;  object-fit:contain;"
+        >
+      </div>
+      
+    </div>
+
+  </div>
+</section>
+
+
+    <!-- Results Section -->
+    <section id="results">
+        <div class="container">
+            <h2>Results</h2>
+            
+            <div class="two-column">
+                <div>
+                    <h4>Before</h4>
+                    <p>Before the redesign, the system suffered from a critically high initial cart abandonment rate of 66.7%at the start of the checkout (Step 2 to Step 3), due to forced login and price ambiguity. This low conversion efficiency resulted in an overall Purchase Complete conversion rate of only 12.0% (15,617 orders from 142,972 initial users).</p>
+                </div>
+                <div>
+                    <h4>After</h4>
+                    <p>With the introduction of guest checkout and upfront price transparency, the initial abandonment rate is projected to drop to around 25%. This improvement is expected to boost the overall purchase completion rate to 35–40%, effectively doubling site performance. In real terms, sales could rise from 15,617 to approximately 37,800, marking a 142% increase in total orders for the same traffic volume.</p>
+                </div>
+            </div>
+
+            <div class="results-grid">
+                <div class="metric-card">
+                    <div class="metric-value">73%</div>
+                    <div class="metric-label">Time Reduced</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">75%</div>
+                    <div class="metric-label">User Satisfaction</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">26.44%</div>
+                    <div class="metric-label">Task Completion</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">72%</div>
+                    <div class="metric-label">Frustration Decreased</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion Section -->
+    <section id="conclusion">
+        <div class="container">
+            <h2>Conclusion</h2>
+            <p>This project reinforced the importance of understanding user workflows holistically rather than optimizing individual touchpoints in isolation. </p>
+            
+            <p>The Insta-Style UX redesign is not merely an interface update; it is a business optimization strategy. By addressing the 66.7% friction point with a user-centric Guest Checkout flow, the company can convert tens of thousands of currently lost customers into loyal buyers, resulting in a substantial and immediate increase in revenue.</p>
+
+            <div class="quote-card">
+                <p>"The best design is invisible—it gets out of the way and lets users accomplish their goals effortlessly."</p>
+                <p class="quote-author">— Key insight from this project</p>
+            </div>
+
+            <p>Moving forward, I'm excited to explore how AI and machine learning can further streamline creative workflows while maintaining user agency and creative control.</p>
+        </div>
+    </section>
+
+    <!-- Prototype & Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2>Prototype & Contact</h2>
+            <div class="accent-line"></div>
+            <p style="margin-bottom: 2rem;">Ready to see Insta-Style in action?</p>
+            <a href="https://www.figma.com/proto/uNBVkUYcIj5CZBB6SqDDSj/Insagram-Prorotype--Iphone-16-pro-?page-id=4839%3A2&node-id=4914-41&viewport=-7604%2C-1346%2C0.3&t=gexhkgx3VAdT7BE3-1&scaling=contain&content-scaling=fixed&starting-point-node-id=4914%3A41"
+   class="btn"
+   target="_blank"
+   onclick="alert('Prototype will open in a new tab');">
+   View Interactive Prototype
+</a>
+
+            <p style="margin-top: 3rem;">Thank you for reading! Feel free to connect with me on <a href="https://www.linkedin.com/in/amal-anilkumar-ux" style="color: #0077FF; text-decoration: none;">LinkedIn</a> or reach out via <a href="mailto:amalkattanam143@gmail.com" style="color: #0077FF; text-decoration: none;">email</a>.</p>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scroll animation on scroll
+        function animateOnScroll() {
+            const sections = document.querySelectorAll('section:not(.visible)');
+            
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (sectionTop < windowHeight * 0.8) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        // Image click handler for full size view
+        document.querySelectorAll('.image-container').forEach(container => {
+            container.addEventListener('click', function() {
+                alert('Image would open in full size view');
+            });
+        });
+
+        // Scroll event listener
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Initial check for visible sections
+        animateOnScroll();
+
+        // Smooth hover effects for metric cards
+        document.querySelectorAll('.metric-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98fe929db1251191',t:'MTc2MDY5MTI4Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
