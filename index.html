@@ -8,6 +8,7 @@
     <meta name="keywords" content="Amal Anilkumar, Amal A, Amalux, UX designer, UI/UX, portfolio">
     <meta name="author" content="Amal Anilkumar">
     <meta name="robots" content="max-image-preview:none">
+    
     <!-- Favicon & Web App Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -15,8 +16,18 @@
     <meta name="msapplication-TileColor" content="#e0b868">
     <meta name="theme-color" content="#e0b868">
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Critical CSS for above-the-fold (inline) -->
+    <style>
+        /* Example critical styles for LCP section */
+        body { margin:0; font-family:system-ui, sans-serif; }
+        .rounded-xl { border-radius: 1rem; }
+        .text-white { color: #ffffff; }
+        .bg-purple { background-color: #563AD1; }
+        /* Add more Tailwind utilities used above-the-fold */
+    </style>
+
+    <!-- Defer full Tailwind -->
+    <script defer src="https://cdn.tailwindcss.com"></script>
     
     <!-- Schema.org structured data -->
   <script type="application/ld+json">
@@ -1655,6 +1666,7 @@
     
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96ff44ff75192fe5',t:'MTc1NTMyOTg3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
 
