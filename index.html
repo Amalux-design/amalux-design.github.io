@@ -1308,207 +1308,7 @@
 </script>
 
 
-      <!-- 🦖 Minimal T-Rex Game (Only Cactus Moving, No Ground) -->
-<section id="trex-section" style="padding:40px 0; background:#B097BE; color:#000;">
-  <style>
-    #trex-section .wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      padding: 20px;
-      box-sizing: border-box;
-    }
 
-    #trex-section canvas {
-      background: #B097BE !important;
-      border-radius: 8px;
-      width: 100%;
-      height: auto;
-      max-width: 800px;
-      max-height: 200px;
-      touch-action: none;
-      border: 1px solid #B097BE;
-    }
-
-    #trex-section .controls { 
-      margin-top: 16px;
-      text-align: center;
-      color: #222;
-      font-size: clamp(13px, 2vw, 16px);
-      line-height: 1.6;
-    }
-
-    #trex-section .controls strong {
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    #trex-section .controls small {
-      display: block;
-      color: #555;
-      margin-top: 6px;
-    }
-  </style>
-
-  <div class="wrap">
-    <canvas id="trex-game"></canvas>
-    <div class="controls">
-      <strong>Controls:</strong>
-      Space / ↑ to jump. Touch to jump.
-      <small style="color: #333333;">High score is saved locally.</small>
-    </div>
-  </div>
-
-  <script>
-    const canvas = document.getElementById('trex-game');
-    const ctx = canvas.getContext('2d');
-    let W, H, scale;
-
-    function resizeCanvas() {
-      const rect = canvas.getBoundingClientRect();
-      W = rect.width;
-      H = rect.height || rect.width * 0.25;
-      const DPR = window.devicePixelRatio || 1;
-      canvas.width = W * DPR;
-      canvas.height = H * DPR;
-      ctx.scale(DPR, DPR);
-      scale = W / 800;
-    }
-    window.addEventListener('resize', resizeCanvas);
-
-    let lastTime = 0, speed = 6, maxSpeed = 15, gravity = 0.6, gameOver = false, score = 0, blinkTimer = 0;
-    let highScore = Number(localStorage.getItem('trex_high') || 0);
-    const baseH = 200;
-    const player = { x:60, y:baseH-44, w:44, h:44, vy:0, jumping:false, y0:baseH-44 };
-    let obstacles = [], spawnTimer = 0;
-
-    function resetGame() {
-      speed = 6; score = 0; gameOver = false;
-      obstacles = []; spawnTimer = 0; blinkTimer = 0;
-      player.y = player.y0; player.vy = 0; player.jumping = false;
-    }
-
-    function rand(a,b){ return Math.random()*(b-a)+a; }
-
-    function addObstacle(){
-      const h = [24,36,48][Math.floor(Math.random()*3)];
-      obstacles.push({x:800+60, w:22, h, y:baseH-h});
-    }
-
-    function update(dt){
-      if(gameOver){ blinkTimer += dt; return; }
-
-      // Gradual speed increase, capped
-      speed += dt * 0.0003;
-      if(speed > maxSpeed) speed = maxSpeed;
-
-      // Player physics
-      if(player.jumping){
-        player.vy += gravity;
-        player.y += player.vy;
-        if(player.y >= player.y0){ player.y = player.y0; player.vy = 0; player.jumping = false; }
-      }
-
-      // Spawn obstacles
-      spawnTimer -= dt;
-      if(spawnTimer <= 0){
-        addObstacle();
-        spawnTimer = rand(900,1500) - Math.min(score*1.2, 500);
-      }
-
-      // Obstacles & collision
-      for(let i=obstacles.length-1;i>=0;i--){
-        const o = obstacles[i];
-        o.x -= speed;
-        if(o.x+o.w < -20) obstacles.splice(i,1);
-
-        // Adjusted collision box for Trex
-        const px = player.x + 5, py = player.y + 10, pW = player.w - 10, pH = player.h - 10;
-        if(px < o.x + o.w && px + pW > o.x && py < o.y + o.h && py + pH > o.y){
-          gameOver = true;
-          if(score > highScore){ highScore = Math.floor(score); localStorage.setItem('trex_high', highScore); }
-        }
-      }
-
-      score += dt * 0.008 * speed;
-    }
-
-    function draw(){
-      ctx.clearRect(0,0,W,H);
-      const s = scale;
-
-      // Player
-      ctx.save();
-      ctx.translate(player.x*s, (player.y-player.h)*s);
-      ctx.fillStyle = '#222';
-      ctx.fillRect(0, player.h*0.4*s, player.w*0.8*s, player.h*0.6*s);
-      ctx.fillRect(player.w*0.6*s, 0, player.w*0.45*s, player.h*0.45*s);
-      ctx.beginPath();
-      ctx.moveTo(-6*s, player.h*0.6*s);
-      ctx.lineTo(-20*s, player.h*0.5*s);
-      ctx.lineTo(-6*s, player.h*0.45*s);
-      ctx.fill();
-      ctx.fillRect(player.w*0.2*s, player.h*0.95*s, 8*s, 10*s);
-      ctx.restore();
-
-      // Cactus obstacles
-      for(const o of obstacles){
-        ctx.fillStyle = '#2b2b2b';
-        ctx.fillRect(o.x*s, o.y*s, o.w*s, o.h*s);
-        ctx.fillRect(o.x+o.w*0.6*s, o.y+o.h*0.3*s, 6*s, 12*s);
-      }
-
-      // Score
-      ctx.fillStyle = '#333';
-      ctx.font = `${13*s}px system-ui,sans-serif`;
-      ctx.fillText('Score: '+Math.floor(score), W-140*s, 28*s);
-      ctx.fillText('High: '+highScore, W-140*s, 46*s);
-
-      // Game Over message
-      if(gameOver){
-        const blink = Math.floor(blinkTimer / 400) % 2 === 0;
-        if(blink){
-          ctx.fillStyle = '#000';
-          ctx.font = `${18*s}px system-ui`;
-          ctx.fillText('GAME OVER — Tap or Press Space to Restart', W/2 - 200*s, H/2);
-        }
-      }
-    }
-
-    function loop(t){
-      if(!lastTime) lastTime = t;
-      let dt = t - lastTime;
-      lastTime = t;
-
-      // Cap dt to avoid spikes
-      if(dt > 50) dt = 50;
-
-      update(dt);
-      draw();
-      requestAnimationFrame(loop);
-    }
-
-    window.addEventListener('keydown', e=>{
-      if(e.code==='Space'||e.code==='ArrowUp'){
-        e.preventDefault();
-        if(gameOver){ resetGame(); return; }
-        if(!player.jumping){ player.jumping = true; player.vy=-12; }
-      }
-    });
-
-    canvas.addEventListener('touchstart', e=>{
-      e.preventDefault();
-      if(gameOver){ resetGame(); return; }
-      if(!player.jumping){ player.jumping = true; player.vy=-12; }
-    }, {passive:false});
-
-    resizeCanvas();
-    requestAnimationFrame(loop);
-  </script>
-</section>
- 
     
 
    <!-- Footer -->
@@ -1539,7 +1339,7 @@
     </div>
 
     <!-- Copyright -->
-    <p class="text-sm text-gray-800 sm:text-base"> All rights reserved to Amal Anilkumar</p>
+    <p class="text-sm text-[#7E7E7E] sm:text-base"> All rights reserved to Amal Anilkumar</p>
   </div>
 </footer>
 
@@ -1567,27 +1367,30 @@
 
 
 
-  <a href="https://www.behance.net/gallery/231556413/Trail-Back-A-Navigation-App" 
-     class="px-2 sm:px-3 py-1 rounded-md transition-colors duration-300 hover:text-white hover:bg-gray-800"
-  >Trail Back UI UX Project</a>
+<a href="https://www.behance.net/gallery/231556413/Trail-Back-A-Navigation-App" 
+   target="_blank"
+   style="padding: 0.25rem 0.75rem; border-radius: 0.375rem; text-decoration: none; color: black;">
+   Trail Back UI UX Project
+</a>
 
+<a href="https://www.behance.net/gallery/234866907/The-Party-Finder-App-Redesign" 
+   target="_blank"
+   style="padding: 0.25rem 0.75rem; border-radius: 0.375rem; text-decoration: none; color: black;">
+   Party Finder UI UX Project
+</a>
 
+<a href="https://amalanilkumar.in/cups.com/" 
+   target="_blank"
+   style="padding: 0.25rem 0.75rem; border-radius: 0.375rem; text-decoration: none; color: black;">
+   Apple & Cups
+</a>
 
-  <a href="https://www.behance.net/gallery/234866907/The-Party-Finder-App-Redesign" 
-     class="px-2 sm:px-3 py-1 rounded-md transition-colors duration-300 hover:text-white hover:bg-gray-800"
-  >Party Finder UI UX Project</a>
+<a href="https://www.behance.net/gallery/230428579/IRCTC-Website-Redesign-UIUX-Design" 
+   target="_blank"
+   style="padding: 0.25rem 0.75rem; border-radius: 0.375rem; text-decoration: none; color: black;">
+   IRCTC Portal Redesign
+</a>
 
-
-
-  <a href="https://amalanilkumar.in/cups.com/" 
-     class="px-2 sm:px-3 py-1 rounded-md transition-colors duration-300 hover:text-white hover:bg-gray-800"
-  >Apple & Cups</a>
-
-
-
-  <a href="https://www.behance.net/gallery/230428579/IRCTC-Website-Redesign-UIUX-Design" 
-     class="px-2 sm:px-3 py-1 rounded-md transition-colors duration-300 hover:text-white hover:bg-gray-800"
-  >IRCTC Portal Redesign</a>
 </nav>
 </div>
 
@@ -1712,6 +1515,7 @@
     
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96ff44ff75192fe5',t:'MTc1NTMyOTg3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
 
