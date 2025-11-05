@@ -78,7 +78,7 @@ header {
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 2rem 5%; /* desktop default */
+  padding: 1.5rem 5%; /* desktop default */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -86,9 +86,9 @@ header {
 }
 
 header.scrolled {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid #e5e5e5;
+  background: rgba(40, 40, 40, 0);
+  backdrop-filter: blur(2px);
+  border-bottom: 1px solid #e5e5e500;
 }
 
 /* Logo */
@@ -167,7 +167,7 @@ header.scrolled {
     border: 2px solid transparent;
     transition: all 0.3s ease;
     overflow: hidden;
-    color: #5c5c5c;
+    color: #828282;
     text-decoration: none;
     font-size: 1rem;
     font-weight: 400;
@@ -419,18 +419,63 @@ header.scrolled {
     }
 
     .skill-item h4 {
-      font-size: 0.85rem;
-      font-weight: 600;
+      font-size: 1rem;
+      font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-bottom: 0.5rem;
-      opacity: 0.6;
+      opacity: 1;
+      color: #000000;
     }
 
     .skill-item p {
       font-size: 1rem;
-      color: #5f5f5f;
+      color: #666666;
     }
+
+
+    /* =========================
+   About Section (Dark Mode)
+   ========================= */
+.dark-about {
+  background-color: #212121;
+  color: #f5f5f5;
+}
+
+.dark-about .section-title {
+  color: #bdbdbd;
+  opacity: 0.8;
+}
+
+.dark-about .section-subtitle {
+  color: #e0e0e0;
+}
+
+.dark-about .about-text h3 {
+  color: #ffffff;
+}
+
+.dark-about .about-text p {
+  color: #cccccc;
+}
+
+.dark-about .skill-item h4 {
+  color: #ffffff;
+}
+
+.dark-about .skill-item p {
+  color: #bbbbbb;
+}
+
+.dark-about .about-image {
+  background: #2a2a2a;
+  border: 1px solid #333333;
+}
+
+.dark-about .skills {
+  border-top: 1px solid #333333;
+}
+
 
     /* Process Section */
     .process-steps {
@@ -761,6 +806,52 @@ header.scrolled {
       opacity: 1;
     }
   }
+
+  /* =========================
+   Process Section (Dark Mode)
+   ========================= */
+.dark-process {
+  background-color: #212121;
+  color: #f5f5f5;
+}
+
+.dark-process .section-title {
+  color: #bdbdbd;
+  opacity: 0.8;
+}
+
+.dark-process .section-subtitle {
+  color: #e0e0e0;
+}
+
+.dark-process .process-step {
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.dark-process .step-content h3 {
+  color: #ffffff;
+}
+
+.dark-process .step-content p {
+  color: #bcbcbc;
+}
+
+.dark-process .step-number {
+  color: #555555;
+}
+.logo {
+  cursor: pointer;
+  color: #808080; /* default color */
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.logo:hover {
+  color: #ffd600; /* bright yellow on hover */
+  transform: scale(1);
+}
+
+
+
   </style>
   <script src="/_sdk/element_sdk.js"></script>
   <style>@view-transition { navigation: auto; }</style>
@@ -769,9 +860,27 @@ header.scrolled {
  </head>
  <body><!-- Header -->
   <header id="header">
-   <div class="logo">
-  <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762324495/android-chrome-512x512_p7wodg.png" alt="Logo">
+   <div class="logo" onclick="window.location.reload()">
+  <svg
+    width="50"
+    height="50"
+    viewBox="0 0 459 505"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M144 253V494.5L182 504.37V155L0 372L29 386.5L144 253Z"
+      fill="currentColor"
+    />
+    <path
+      d="M311 10L273 0V348L308 308L370 379H413L330 281L459 128H418L311 251V10Z"
+      fill="currentColor"
+    />
+  </svg>
 </div>
+
+
+
 
 
 
@@ -870,62 +979,53 @@ header.scrolled {
 
 <div class="section-divider"></div><!-- Design -->
 
-  <section id="process" class="fade-in">
-   <h2 class="section-title">PROCESS</h2>
-   <p class="section-subtitle">How I design experiences</p>
-   <div class="process-steps">
+  <section id="process" class="fade-in dark-process">
+  <h2 class="section-title">PROCESS</h2>
+  <p class="section-subtitle">How I design experiences</p>
+  <div class="process-steps">
     <div class="process-step">
-     <div class="step-content">
-      <h3>Discovering & Researching</h3>
-      <p>Problem and Users </p>
-     </div>
-     <div></div>
-     <div class="step-number">
-      01
-     </div>
+      <div class="step-content">
+        <h3>Discovering & Researching</h3>
+        <p>Problem and Users</p>
+      </div>
+      <div></div>
+      <div class="step-number">01</div>
     </div>
     <div class="process-step">
-     <div class="step-content">
-      <h3>Define &amp; Planning</h3>
-      <p>Strategy &amp; Framing</p>
-     </div>
-     <div></div>
-     <div class="step-number">
-      02
-     </div>
+      <div class="step-content">
+        <h3>Define &amp; Planning</h3>
+        <p>Strategy &amp; Framing</p>
+      </div>
+      <div></div>
+      <div class="step-number">02</div>
     </div>
     <div class="process-step">
-     <div class="step-content">
-      <h3>Ideation and Brainstroming</h3>
-      <p>Creative Exploration</p>
-     </div>
-     <div></div>
-     <div class="step-number">
-      03
-     </div>
+      <div class="step-content">
+        <h3>Ideation and Brainstorming</h3>
+        <p>Creative Exploration</p>
+      </div>
+      <div></div>
+      <div class="step-number">03</div>
     </div>
     <div class="process-step">
-     <div class="step-content">
-      <h3>Designing</h3>
-      <p>Wireframes &amp; Visual Systems</p>
-     </div>
-     <div></div>
-     <div class="step-number">
-      04
-     </div>
+      <div class="step-content">
+        <h3>Designing</h3>
+        <p>Wireframes &amp; Visual Systems</p>
+      </div>
+      <div></div>
+      <div class="step-number">04</div>
     </div>
     <div class="process-step">
-     <div class="step-content">
-      <h3>Iterate &amp; Testing</h3>
-      <p>Feedback &amp; Validation</p>
-     </div>
-     <div></div>
-     <div class="step-number">
-      05
-     </div>
+      <div class="step-content">
+        <h3>Iterate &amp; Testing</h3>
+        <p>Feedback &amp; Validation</p>
+      </div>
+      <div></div>
+      <div class="step-number">05</div>
     </div>
-   </div>
-  </section>
+  </div>
+</section>
+
 
 
 
@@ -1135,13 +1235,3 @@ header.scrolled {
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'999a19c0f020c122',t:'MTc2MjMyMjEwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
-
-
-
-
-
-
-
-
