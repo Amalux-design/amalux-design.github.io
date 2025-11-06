@@ -546,7 +546,7 @@ header:not(.dark-bg) .nav-links a {
     }
 
     .project-card:hover .project-title {
-      color: #6d6d6d
+      color: #000000
     }
 
     .project-card:hover .project-title::after {
@@ -839,6 +839,33 @@ header:not(.dark-bg) .nav-links a {
   max-height: 100%;
   width: auto;
 }
+
+/* Basic browser reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body defaults */
+body {
+  font-family: 'Inter', sans-serif;
+  color: #000000;
+  background-color: #fff;
+  line-height: 1.5;
+}
+
+/* Remove blue underlines from links */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Optional: add hover style for links */
+a:hover {
+  color: #696969; /* soft yellow accent */
+}
+
 </style>
   
  </head>
@@ -1231,5 +1258,3 @@ window.addEventListener("scroll", () => {
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'999a19c0f020c122',t:'MTc2MjMyMjEwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
-
