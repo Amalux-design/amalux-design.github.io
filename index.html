@@ -69,38 +69,36 @@
       overflow-x: hidden;
     }
 
-/* =========================
-   Header
-   ========================= */
+/* === HEADER COLORS THAT ADAPT TO BACKGROUND === */
 header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   z-index: 1000;
-  padding: 1.5rem 5%; /* desktop default */
+  padding: 1.5rem 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease;
 }
 
+/* transparent default when scrolled */
 header.scrolled {
   background: rgba(40, 40, 40, 0);
   backdrop-filter: blur(2px);
-  border-bottom: 1px solid #e5e5e500;
+  border-bottom: 1px solid transparent;
 }
 
-/* Logo */
-.logo {
-  height: 50px;       /* desktop default */
-  display: flex;
-  align-items: center;
+/* when overlapping dark sections → only nav links change */
+header.dark-bg .nav-links a {
+  color: #ffffff !important;
+}
+header.dark-bg .nav-links a:hover {
+  color: #ffe359 !important;
 }
 
-.logo img {
-  max-height: 100%;
-  width: auto;
+/* default (light background) */
+header:not(.dark-bg) .nav-links a {
+  color: #2a2a2a;
 }
 
 /* =========================
@@ -111,12 +109,6 @@ header.scrolled {
   header {
     padding: 1rem 5%;
   }
-
-  /* Logo smaller */
-  .logo {
-    height: 35px;
-  }
-
   /* Primary nav links */
   .nav-links {
     display: flex;
@@ -138,7 +130,7 @@ header.scrolled {
     padding: 4px 10px;  /* small padding */
     border: none;
     border-radius: 25px;
-    background-color: #ffffff;
+    background-color: #ffffff00;
   }
 
   /* Arrow always visible */
@@ -161,21 +153,20 @@ header.scrolled {
     list-style: none;
   }
 
-  .nav-links a {
-    padding: 6px 16px;          
-    border-radius: 25px;         
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-    overflow: hidden;
-    color: #484848;
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 400;
-    display: inline-flex;
-    align-items: center;
-    position: relative;
-    background-color: #ffffff;
-  }
+  /* Nav links base */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+  display: inline-flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
 
   .nav-links a::after {
     content: '↗';
@@ -189,7 +180,7 @@ header.scrolled {
   .nav-links a:hover {
     color: #000000;
     border-color: #c9c9c9;
-    background-color: #ffffff;
+    background-color: #ffffff00;
   }
 
   .nav-links a:hover::after {
@@ -197,11 +188,6 @@ header.scrolled {
     transform: scale(1) translateY(0);
   }
 }
-
-
-    
-    
-    
 /* Mobile & Tablet (default) */
 .nav-links1 {
   display: flex;
@@ -261,9 +247,6 @@ header.scrolled {
     transform: scale(1) translateY(0);
   }
 }
-
-
-
 
     /* Hero Section */
     .hero {
@@ -384,7 +367,6 @@ header.scrolled {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 /* ✅ Make image fill the box */
@@ -432,8 +414,6 @@ header.scrolled {
       font-size: 1rem;
       color: #666666;
     }
-
-
     /* =========================
    About Section (Dark Mode)
    ========================= */
@@ -476,7 +456,6 @@ header.scrolled {
   border-top: 1px solid #333333;
 }
 
-
     /* Process Section */
     .process-steps {
       max-width: 1200px;
@@ -515,7 +494,6 @@ header.scrolled {
       font-size: 1rem;
       color: #616161;
     }
-
     .step-number {
       font-size: 5rem;
       font-weight: 400;
@@ -557,7 +535,6 @@ header.scrolled {
     opacity: 1;
   }
 }
-
     .project-card .project-title::after {
       content: '↗';
       margin-left: 0;
@@ -569,7 +546,7 @@ header.scrolled {
     }
 
     .project-card:hover .project-title {
-      opacity: 0.6;
+      color: #6d6d6d
     }
 
     .project-card:hover .project-title::after {
@@ -660,7 +637,6 @@ header.scrolled {
   }
 }
 
-
 /* Mobile & Tablet (default) */
 .social-links {
   display: flex;
@@ -730,8 +706,6 @@ header.scrolled {
     transform: scale(1) translateY(0);
   }
 }
-
-
 
     /* Footer */
     footer {
@@ -849,10 +823,23 @@ header.scrolled {
   color: #808080; /* bright yellow on hover */
   transform: scale(1);
 }
+/* Logo smaller */
+  .logo {
+    height: 35px;
+  }
 
+  /* Logo */
+.logo {
+  height: 50px;       /* desktop default */
+  display: flex;
+  align-items: center;
+}
 
-
-  </style>
+.logo img {
+  max-height: 100%;
+  width: auto;
+}
+</style>
   <script src="/_sdk/element_sdk.js"></script>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -862,7 +849,7 @@ header.scrolled {
   <header id="header">
    <div class="logo" onclick="window.location.reload()">
   <svg
-    width="50"
+    width="40"
     height="50"
     viewBox="0 0 459 505"
     fill="none"
@@ -879,12 +866,6 @@ header.scrolled {
   </svg>
 </div>
 
-
-
-
-
-
-
    <nav>
     <ul class="nav-links">
      <li><a href="https://drive.google.com/file/d/1ErZetxQWSWPmI-QRotbqgMINS9QDVXpH/view?usp=sharing">Resume</a></li>
@@ -895,8 +876,6 @@ header.scrolled {
   <section class="hero">
    <h1 id="hero-name">Hi, I'm Amal</h1>
    <p class="tagline" id="hero-tagline"></p>
-
-
 
 <script>
   const tagline = document.getElementById("hero-tagline");
@@ -920,8 +899,7 @@ header.scrolled {
   <a href="#contact">Let's Connect</a>
 </div>
 
-  </section>
-
+</section>
 
   <div class="section-divider"></div><!-- Projects Section -->
 
@@ -976,7 +954,6 @@ header.scrolled {
   </div>
 </section>
 
-
 <div class="section-divider"></div><!-- Design -->
 
   <section id="process" class="fade-in dark-process">
@@ -1026,12 +1003,6 @@ header.scrolled {
   </div>
 </section>
 
-
-
-
-
-
-
 <div class="section-divider"></div><!-- Tools Section -->
 
 <section id="tools" class="fade-in">
@@ -1073,9 +1044,6 @@ header.scrolled {
     </div>
   </div>
 </section>
-
-
-
 
 <div class="section-divider"></div><!-- About Section -->
 
@@ -1232,6 +1200,37 @@ header.scrolled {
         mapToEditPanelValues
       });
     }
+
+    // Header scroll + adaptive nav link color
+const header = document.getElementById("header");
+const darkSections = document.querySelectorAll(".dark-about, .dark-process");
+
+window.addEventListener("scroll", () => {
+  const currentScroll = window.scrollY;
+
+  // transparent effect on scroll
+  if (currentScroll > 100) {
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
+
+  // detect if overlapping dark sections
+  let onDark = false;
+  darkSections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= 80 && rect.bottom >= 80) {
+      onDark = true;
+    }
+  });
+
+  if (onDark) {
+    header.classList.add("dark-bg");
+  } else {
+    header.classList.remove("dark-bg");
+  }
+});
+
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'999a19c0f020c122',t:'MTc2MjMyMjEwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
