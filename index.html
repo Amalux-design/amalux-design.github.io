@@ -79,17 +79,30 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.3s ease;
+  transition: background-color 0.4s ease, color 0.4s ease, backdrop-filter 0.4s ease;
+  background: rgba(255, 255, 255, 0.85); /* Light by default */
+  backdrop-filter: blur(10px);
 }
 
-/* transparent default when scrolled */
+/* Default (light background) */
+header:not(.dark-bg) .nav-links a {
+  color: #2a2a2a;
+}
+
+/* Transparent when scrolled (optional aesthetic) */
 header.scrolled {
-  background: rgba(40, 40, 40, 0);
-  backdrop-filter: blur(0px);
-  border-bottom: 1px solid transparent;
+  background: rgb(255, 255, 255);
+
+  border-bottom: 1px solid rgba(200, 200, 200, 0.2);
 }
 
-/* when overlapping dark sections → only nav links change */
+/* When overlapping dark sections → background + links change */
+header.dark-bg {
+  background: #212121;
+
+  border-bottom: 1px solid rgb(60, 60, 60);
+}
+
 header.dark-bg .nav-links a {
   color: #ffffff !important;
 }
@@ -97,10 +110,6 @@ header.dark-bg .nav-links a:hover {
   color: #ffe359 !important;
 }
 
-/* default (light background) */
-header:not(.dark-bg) .nav-links a {
-  color: #2a2a2a;
-}
 
 /* =========================
    Mobile & Tablet (default)
@@ -1390,7 +1399,6 @@ document.querySelectorAll("#process .process-step h3").forEach(h3 => {
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'999a19c0f020c122',t:'MTc2MjMyMjEwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
 
 
 
