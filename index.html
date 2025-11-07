@@ -866,6 +866,63 @@ a:hover {
   color: #000000; /* soft yellow accent */
 }
 
+
+
+
+#process .step-content h3:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+#process .step-content {
+  position: relative;
+}
+
+#process .step-content h3 {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 10px;
+}
+
+#process .dropdown-arrow {
+  font-size: 30px;
+  transition: transform 0.3s ease;
+  color: inherit;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#process .dropdown-arrow.active {
+  transform: rotate(90deg);
+}
+
+#process .dropdown-info {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s ease;
+  color: #a4a4a4;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-top: 0;
+}
+
+#process .dropdown-info.show {
+  opacity: 1;
+  max-height: 300px;
+  margin-top: 8px;
+}
+
+#process .dropdown-info div {
+  margin-bottom: 6px;
+}
+
+#process .dropdown-info div:last-child {
+  margin-bottom: 0;
+}
+
+
 </style>
   
  </head>
@@ -991,52 +1048,77 @@ a:hover {
 
 <div class="section-divider"></div><!-- Design -->
 
-  <section id="process" class="fade-in dark-process">
+<section id="process" class="fade-in dark-process">
   <h2 class="section-title">PROCESS</h2>
-  <p class="section-subtitle">How I design experiences</p>
+  <p class="section-subtitle">How I design after getting an Idea?</p>
   <div class="process-steps">
+    
+
     <div class="process-step">
       <div class="step-content">
-        <h3>Discovering & Researching</h3>
-        <p>Problem and Users</p>
+        <h3 data-info="• Identify the Problem, • Formulation of Hypothesis, • Formulation of Research Plan, • Conduct Research, • Analysis and Interpretation, • Drawing Conclusion, • Formulation of Report">Research</h3>
+        <p>Quantitative & Qualitative Research</p>
       </div>
       <div></div>
       <div class="step-number">01</div>
     </div>
+
     <div class="process-step">
       <div class="step-content">
-        <h3>Define &amp; Planning</h3>
-        <p>Strategy &amp; Framing</p>
+        <h3 data-info="• Defining goals, • Framing strategy eg: Who What Why When, • Planning User flows, • Creating User Personas">Define & Planning</h3>
+        <p>Strategy & Framing</p>
       </div>
       <div></div>
       <div class="step-number">02</div>
     </div>
+
     <div class="process-step">
       <div class="step-content">
-        <h3>Ideation and Brainstorming</h3>
-        <p>Creative Exploration</p>
+        <h3 data-info="Divergent Activities, • Brain Storming, • Crazy 8, • Mind Mapping, Convergent Activities, • Synthesising, • Design Decision Making">Ideation</h3>
+        <p>Creative & Collaborative Exploration</p>
       </div>
       <div></div>
       <div class="step-number">03</div>
     </div>
+
     <div class="process-step">
       <div class="step-content">
-        <h3>Designing</h3>
-        <p>Wireframes &amp; Visual Systems</p>
+        <h3 data-info="Creating low-fidelity wireframes and prototypes and testing early interactions.">Prototyping</h3>
+        <p>Wireframes and Low Fidelity Designs</p>
       </div>
       <div></div>
       <div class="step-number">04</div>
     </div>
+
     <div class="process-step">
       <div class="step-content">
-        <h3>Iterate &amp; Testing</h3>
-        <p>Feedback &amp; Validation</p>
+        <h3 data-info="• Testing the prototype with users and validate with users.,• If no desired outcome is attained then process is restarted from researching (01). ">Pre Testing</h3>
+        <p>Usability Testing</p>
       </div>
       <div></div>
       <div class="step-number">05</div>
     </div>
+
+    <div class="process-step">
+      <div class="step-content">
+        <h3 data-info="Designing polished high-fidelity visuals and scalable systems for development.">Designing</h3>
+        <p>Hi-Fi Designs & Visual Systems</p>
+      </div>
+      <div></div>
+      <div class="step-number">06</div>
+    </div>
+
+    <div class="process-step">
+      <div class="step-content">
+        <h3 data-info="Validating solutions and iterate with feedback of :, • Users, • Developers, • Stakeholders">Testing & Iteration</h3>
+        <p>Feedback & Validation</p>
+      </div>
+      <div></div>
+      <div class="step-number">07</div>
+    </div>
   </div>
 </section>
+
 
 <div class="section-divider"></div><!-- Tools Section -->
 
@@ -1266,10 +1348,43 @@ window.addEventListener("scroll", () => {
   }
 });
 
+
+document.querySelectorAll("#process .process-step h3").forEach(h3 => {
+  // Create arrow and add it to h3
+  const arrow = document.createElement("span");
+  arrow.classList.add("dropdown-arrow");
+  arrow.innerHTML = "&rsaquo;"; // › line arrow
+  h3.appendChild(arrow);
+
+  // Create dropdown info box
+  const infoBox = document.createElement("div");
+  infoBox.className = "dropdown-info";
+
+  // Split data-info by commas and add line breaks
+  const infoText = h3.dataset.info;
+  if (infoText) {
+    const lines = infoText.split(",").map(item => item.trim());
+    infoBox.innerHTML = lines.join("<br>");
+  } else {
+    infoBox.textContent = "More information about this step.";
+  }
+
+  // Append dropdown box right after h3's parent (.step-content)
+  h3.parentNode.appendChild(infoBox);
+
+  // Toggle on click (anywhere on h3 or arrow)
+  h3.addEventListener("click", () => {
+    const isOpen = infoBox.classList.toggle("show");
+    arrow.classList.toggle("active", isOpen);
+  });
+});
+
+
+
+
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'999a19c0f020c122',t:'MTc2MjMyMjEwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
-
 
 
 
