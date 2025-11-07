@@ -130,7 +130,7 @@ header.dark-bg .nav-links a:hover {
   .nav-links a {
     color: #5c5c5c;
     text-decoration: none;
-    font-size: 0.9rem;  /* smaller text */
+    font-size: 1.2rem;  /* smaller text */
     font-weight: 400;
     position: relative;
     display: inline-flex;
@@ -909,11 +909,13 @@ a:hover {
   color: inherit;
   display: inline-block;
   vertical-align: middle;
+  transform: rotate(90deg); /* now points down */
 }
 
 #process .dropdown-arrow.active {
-  transform: rotate(90deg);
+  transform: rotate(270deg); /* will point right when opened (optional) */
 }
+
 
 #process .dropdown-info {
   max-height: 0;
