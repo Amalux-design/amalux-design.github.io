@@ -9,7 +9,8 @@
     <meta name="keywords" content="Amal Anilkumar, Amal A, Amalux, UX designer, UI/UX, portfolio">
     <meta name="author" content="Amal Anilkumar">
     <meta name="robots" content="max-image-preview:none">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:ital@1&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@1&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 
   <!-- Favicon & Web App Icons -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -160,12 +161,19 @@ header:not(.dark-bg) .nav-links a {
   list-style: none;
 }
 .nav-links a {
+  color: #636363;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 1.2rem;  
   font-weight: 400;
+  position: relative;
   display: inline-flex;
   align-items: center;
-  transition: color 0.3s ease;
+
+  padding: 6px 14px;        
+  border-radius: 25px;       
+ /* pill border always visible */
+  background-color: transparent;  /* remove bg color on mobile */
+  overflow: visible;
 }
 
   .nav-links a::after {
@@ -197,7 +205,7 @@ header:not(.dark-bg) .nav-links a {
 }
 
 .nav-links1 a {
-  color: #757575;
+  color: #636363;
   text-decoration: none;
   font-size: 1.2rem;  
   font-weight: 400;
@@ -256,12 +264,13 @@ header:not(.dark-bg) .nav-links a {
       justify-content: center;
       align-items: center;
       text-align: center;
-      padding: 0 5%;
+      
       position: relative;
     }
 
     .hero h1 {
       font-size: clamp(3rem, 8vw, 7rem);
+      color: #000000;
       font-weight: 600;
       letter-spacing: -0.04em;
       margin-bottom: 2rem;
@@ -954,33 +963,28 @@ a:hover {
     </ul>
    </nav>
   </header><!-- Hero Section -->
-  <section class="hero">
-   <h1 id="hero-name">Hi, I'm Amal</h1>
-   <p class="tagline" id="hero-tagline"></p>
+  <!-- HERO SECTION -->
+<section class="hero" style="align-items: flex-start; text-align: left; padding-top: 12rem; max-width: 900px; margin: 0 auto;">
+  <h1 id="hero-name" style="font-size: clamp(3rem, 7vw, 6rem); 
+           font-weight: 600; 
+           margin-bottom: 1.2rem; 
+           line-height: 1.1;">
+    Hi, I'm Amal
+  </h1>
+  
 
-<script>
-  const tagline = document.getElementById("hero-tagline");
-  const roles = ["User Experience Designer", "Usability Obsessed", "Product Designer", "Detail Focused", "User Interface Designer", "Empathy Driven"];
-  let index = 0;
+  <p style="font-family: 'Poppins', sans-serif; font-style: normal; color: #2a2a2a; font-size: clamp(1.3rem, 2.5vw, 1.5rem); line-height: 1.6; max-width: 800px;">
+    UX Designer with 1 year of experience crafting process-led web and mobile app designs that are clean, responsive, and user-focused.
+  </p>
 
-  function updateText() {
-    index = (index + 1) % roles.length;
-    // Add span to animate each new text
-    tagline.innerHTML = `<span>${roles[index]}</span>`;
-  }
-
-  // Initialize first text
-  tagline.innerHTML = `<span>${roles[0]}</span>`;
-
-  // Change text every 2 seconds
-  setInterval(updateText, 2000);
-</script>
-
-   <div class="nav-links1">
-  <a href="#contact">Let's Connect</a>
-</div>
-
+  <div class="nav-links1" style="margin-top: 3rem;">
+    <a href="#work">Works</a>
+    <a href="#strategy">Process</a>
+    <a href="#collaboration">Tools</a>
+    <a href="#about">About Me</a>
+  </div>
 </section>
+
 
   <div class="section-divider"></div><!-- Projects Section -->
 
