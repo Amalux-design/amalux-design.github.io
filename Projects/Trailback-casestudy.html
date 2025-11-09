@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TrailBack — Hiker's Navigation App — Case Study (2025)</title>
+  <meta name="description" content="TrailBack — A UI/UX case study for an offline-first hiker navigation app. Research, design, and usability testing notes.">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind (optional utility; used sparingly) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --muted: #4a4a4a;
+  --primary: #11A89A;
+  --max-w: 1400px;
+  --side-pad: 1.5rem; /* unified side padding */
+}
+
+/* Global */
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  line-height: 1.6;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--side-pad);
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+  background: #ffffff;
+  margin-bottom: 6rem; /* distinct break before next section */
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* fills hero, crops if needed */
+  object-position: center; /* focus on top */
+  display: block;
+}
+
+/* Hero content */
+.hero-content {
+  max-width: var(--max-w);
+  margin: 92px auto 64px;
+  padding: 0 var(--side-pad);
+}
+
+.hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  margin-bottom: 1rem; /* clear link to next line */
+  font-weight: 600;
+}
+
+.hero-content p {
+  margin-top: 0;
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+
+/* Sections */
+.section {
+  margin: 6rem 0; /* strong section separation */
+  padding: 0 var(--side-pad);
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: 0.5rem; /* clear break before content */
+}
+
+.section h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 3rem; /* bigger space before new subtopic */
+  margin-bottom: 1rem; /* tight link to content below */
+}
+
+.section p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin: 0 0 1rem; /* moderate vertical rhythm */
+}
+
+
+
+
+
+/* Images */
+.full-width-image {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto 60px;
+  padding: 0 var(--side-pad);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.full-width-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Research images */
+.research-img {
+  width: 100%;
+  max-width: var(--max-w);
+  display: block;
+  margin: 24px auto;
+  padding: 0 var(--side-pad);
+  border-radius: 8px;
+}
+
+.image-caption {
+  font-size: .95rem;
+  color: #6b7280;
+  text-align: center;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* Branding grid */
+.branding-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.color-swatches {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.color-swatch {
+  height: 120px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.color-primary { background: var(--primary); }
+.color-secondary { background: #111111; }
+.color-accent { background: #29CF94; }
+.color-neutral { background: #F7F7F7; border: 1px solid #e6e6e6; }
+
+/* Lists and images get comfortable spacing */
+#problem-text {
+  margin: 0;
+  padding-left: 0;
+  list-style-position: inside;
+}
+
+
+#problem-text li {
+  margin-bottom: 0.75rem;
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 48px var(--side-pad);
+  background: #fafafa;
+  margin-top: 64px;
+}
+
+footer p {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  :root {
+    --side-pad: 1.2rem;
+  }
+
+  .hero {
+    height: 50vh;
+  }
+
+  .hero-content {
+    margin: 32px auto 48px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.7rem;
+    line-height: 1.3;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .section {
+    margin: 56px 0;
+    padding: 0 var(--side-pad);
+  }
+
+  .section h2 {
+    font-size: 1.6rem;
+  }
+
+  .section h3 {
+    font-size: 1.15rem;
+    margin: 20px 0 10px;
+  }
+
+  .section p,
+  .section li {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .branding-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .color-swatch {
+    height: 90px;
+  }
+
+  .full-width-image {
+    margin: 0 auto 40px;
+  }
+
+  .research-img {
+    margin: 16px auto;
+  }
+}
+a {
+  color: #0095ff;        /* Blue tone */
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+a:hover {
+  color: #0095ff;        /* Darker blue on hover */
+}
+
+
+.hifi-section {
+  text-align: center;
+  padding: 60px 0;
+  background: #fff;
+}
+
+.hifi-section h3 {
+  font-size: 1.8em;
+  margin-bottom: 0.5em;
+  color: #1a1a1a;
+}
+
+.hifi-section p {
+  max-width: 600px;
+  margin: 0 auto 2em;
+  color: #4a4a4a;
+  line-height: 1.6;
+}
+
+/* Reel styling */
+.reel-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.reel {
+  overflow: hidden;
+}
+
+.reel-track {
+  display: flex;
+  width: max-content;
+}
+
+.reel img {
+  height: 420px;
+  margin-right: 30px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+
+/* Motion */
+.reel-top .reel-track {
+  animation: scroll-right 45s linear infinite;
+}
+
+.reel-bottom .reel-track {
+  animation: scroll-left 45s linear infinite;
+}
+
+/* Keyframes */
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.wide-hero {
+  position: relative;
+  width: 100vw;
+  margin-top: 10rem;
+  margin-left: calc(-50vw + 50%);
+  height: 90vh;
+  overflow: hidden;
+}
+
+.wide-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.85);
+}
+html, body {
+  overflow-x: hidden;
+}
+
+/* Overlay text */
+.wide-hero .hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+  max-width: 800px;
+  padding: 0 1rem;
+}
+
+.wide-hero .hero-content h1 {
+  font-size: 2.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.wide-hero .hero-content p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* Responsive tweak */
+@media (max-width: 768px) {
+  .wide-hero {
+    height: 70vh;
+  }
+  .wide-hero .hero-content h1 {
+    font-size: 1.8rem;
+  }
+  .wide-hero .hero-content p {
+    font-size: 1rem;
+  }
+}
+
+
+  </style>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TrailBack — Hiker's Navigation App — Case Study</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero" role="banner" aria-hidden="false">
+    <img
+      class="hero-img"
+      src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762678627/pexels-rethaferguson-3061217_2_s1m9aq.webp"
+      alt="Hiker on trail"
+    />
+
+    <div class="hero-overlay container">
+      <h1 id="project-title">TrailBack — Hiker's Navigation App — Case Study</h1>
+      <p id="project-subtitle">End-to-end process: research, design, and usability testing of an offline-first hiking navigation app.</p>
+    </div>
+  </header>
+
+  <main class="container" id="main" role="main">
+    <section class="section" id="overview">
+      <h2>Project Overview</h2>
+      <p>Design a navigation app that records unmapped routes using GPS and guides users back to their starting point. Allow pinning of hazards and key spots — providing reliable offline navigation when internet is unavailable.</p>
+    </section>
+
+    <div class="full-width-image" aria-hidden="true">
+      <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762691941/About_2_mx6rny.webp" alt="Project overview visual">
+    </div>
+
+    <section class="section" id="problem">
+      <h2>Problem</h2>
+      <p>Many hikers get lost due to unreliable offline navigation and cluttered interfaces. TrailBack focuses on offline GPS tracing, simple UI, and safety features to reduce search & rescue incidents.</p>
+    </section>
+
+    <section class="section" id="purpose">
+      <h2>The Purpose</h2>
+      <ul id="purpose-list">
+        <li>Record and retrace journeys offline using GPS on unmapped trails.</li>
+        <li>Mark and share key locations to alert fellow hikers about potential dangers.</li>
+        <li>Provide simple, reliable navigation tools with real-time route updates.</li>
+      </ul>
+    </section>
+
+    <div class="full-width-image" aria-hidden="true">
+      <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762694933/Frame_1597880407_6_ydibcq.webp" alt="Problem analysis visual">
+    </div>
+
+    <section class="section" id="research">
+      <h2>Research</h2>
+
+      <h3>Primary Research</h3>
+      <p>Gathered qualitative feedback from hiking communities and mapped pain points: offline reliability, UI complexity, and safety gaps.</p>
+      <img class="research-img" src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762705581/Frame_1597880423_tbg6ky.webp" alt="User flow diagram">
+      <p class="image-caption">User flow: recording → pinning → safe return path.</p>
+
+      <h3>Competitor Analysis</h3>
+      <p>Analyzed AllTrails, Gaia GPS, and Komoot. Many require internet or paid offline packs — opportunity for an accessible offline-first app.</p>
+
+      <h3>Target Users</h3>
+      <p>Hikers and outdoor explorers who need dependable offline navigation and lightweight safety features.</p>
+
+      <h3>Pain Points</h3>
+      <p>Unreliable offline maps, confusing visual density, and difficulty reaching safety controls.</p>
+      <img class="research-img" src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762695554/Pain_Points_1_ndy8iz.webp" alt="Pain points board">
+
+      <h3>User Journey Mapping</h3>
+      <p>Mapping helped identify where users get lost or distracted and which controls need to be within thumb reach.</p>
+      <img class="research-img" src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762705808/User_Journey_mapping_f8mcm0.webp" alt="User journey map">
+    </section>
+
+    <section class="section" id="solutions">
+      <h2>Key Insights</h2>
+      <p>Implemented a minimalist satellite-first UI, removed non-essential widgets, relaunched clearer icons, made SOS prominent, and moved live telemetry (distance/elevation) to a bottom panel to reduce clutter.</p>
+    </section>
+
+    <div class="full-width-image" aria-hidden="true">
+      <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762714513/pexels-conojeghuo-211047_nkopk4.jpg" alt="Design solutions visual">
+    </div>
+
+    <section class="section" id="design-phase">
+      <h2>The Design Phase</h2>
+
+      <h3>User Flow</h3>
+      <p>Flow covers starting a journey, recording, dropping safety pins, and retracing a route offline.
+        <a href="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762716766/Chart_el9ks0.svg" target="_blank" rel="noopener" style="color:#0077cc; text-decoration:underline; font-weight:500;">
+          View full diagram.
+        </a>
+      </p>
+      <img class="research-img" src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762706418/Desktop_-_9_lczzr1.svg" alt="User flow diagram">
+
+      <h3>Information Architecture</h3>
+      <p>Flow covers starting a journey, recording, dropping safety pins, and retracing a route offline.</p>
+      <img class="research-img" src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762706937/Desktop_-_10_vq8xmw.svg" alt="IA diagram">
+
+      <h3>Interaction Framework</h3>
+      <p>This slide visualizes the intricate web of interactions within the prototype.</p>
+      <img class="research-img" src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762707223/Desktop_-_11_e10wcb.webp" alt="Interaction framework">
+
+      <h3>Lo-Fi Wireframes</h3>
+      <img class="research-img" src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762716519/Frame_22_mdnycy.png" alt="Lo-fi wireframes">
+    </section>
+
+    <section class="section hi-fi">
+      </footer><h3>Hi-Fi Mockups</h3>
+  <p>
+    Flow covers starting a journey, recording, dropping safety pins, and retracing a route offline.
+  </p>
+
+  <!-- Dual reel showcase -->
+  <div class="reel-container">
+    <!-- Top Row -->
+    <div class="reel reel-top">
+      <div class="reel-track">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709212/Group_341-1_rouze8.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709213/Group_341-2_ugaqry.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709214/Group_341-3_h0gcjk.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709215/Group_341-4_txemak.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709216/Group_341-5_ekstzh.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709217/Group_342_ljpwzx.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709218/Group_361_qsxymk.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709219/Group_340_qgnbor.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709299/Group_340-1_igugit.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709300/Group_340-2_ioxbuu.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709301/Group_340-3_clwknv.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709302/Group_341_ebp9bm.webp" alt="">
+        <!-- Duplicate for seamless looping -->
+        
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709215/Group_341-4_txemak.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709214/Group_341-3_h0gcjk.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709213/Group_341-2_ugaqry.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709212/Group_341-1_rouze8.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709216/Group_341-5_ekstzh.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709217/Group_342_ljpwzx.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709302/Group_341_ebp9bm.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709219/Group_340_qgnbor.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709301/Group_340-3_clwknv.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709299/Group_340-1_igugit.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709300/Group_340-2_ioxbuu.webp" alt="">
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762709218/Group_361_qsxymk.webp" alt="">
+        
+      </div>
+    </div>
+    </section>
+
+    <section class="section" id="usability">
+      <h2>Usability Testing & Onboarding</h2>
+      <p>Short study with 4 participants: preference for short, direct routes and minimal, reachable controls. Iterations improved clarity and ease-of-use.</p>
+
+      <h3>Onboarding</h3>
+      <p>All 4 participants hesitated to sign up — added a clear "Skip Sign In" option on the welcome screen to reduce entry friction.</p>
+
+      <h3>Navigation</h3>
+      <p>Participants preferred a conventional satellite map. We removed weather/compass widgets that added clutter and could fail offline. SOS is now placed prominently; telemetry moved to a bottom shutter for a cleaner map view.</p>
+      <img class="research-img" src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762710629/Frame_1597880421_yr0frk.webp" alt="Navigation mockup">
+    </section>
+
+    <section class="section" id="features">
+      <h2>Marker & SOS</h2>
+      <h3>Marker</h3>
+      <p>The marker lets users pin hazards or points of interest and optionally share them with fellow hikers.</p>
+      <img class="research-img" src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762713546/Frame_1597880421_2_rqvwmv.webp" alt="Marker feature">
+
+      <h3>SOS</h3>
+      <p>The SOS button quickly alerts emergency contacts with coordinates. It can use phone sensors to detect sudden movements and trigger alerts when appropriate.</p>
+      <img class="research-img" src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762710082/sos_mubooi.webp" alt="SOS mockup">
+    </section>
+
+    <section class="section" id="learning">
+      <h2>Learning and Insights</h2>
+      <p><strong>TrailBack</strong> taught that <strong>empathy and simplicity</strong> are key. The app works silently in the background, uses minimal resources, and records trails accurately using GPS so users can focus on the journey.</p>
+    </section>
+
+    <section class="wide-hero thanks" aria-hidden="false">
+  <img class="hero-img" src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762714519/pexels-karola-g-6954777_bjti1t.jpg" alt="Hiker on trail looking back">
+  <div class="hero-content">
+    <h1>Thank you For Scrolling</h1>
+  </div>
+</section>
+
+  </main>
+
+  
+  
+
+  <script>
+    // Simple IntersectionObserver reveal for sections and images
+    (function(){
+      const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{ if(entry.isIntersecting){ entry.target.classList.add('visible'); }});
+      },{threshold:0.12,rootMargin:'0px 0px -20px 0px'});
+
+      document.querySelectorAll('.section, .full-width-image').forEach(el=>observer.observe(el));
+    })();
+
+    // Lightweight config handler: if an external elementSdk exists, integrate safely
+    (function(){
+      const defaultConfig = {
+        project_title: document.getElementById('project-title').textContent,
+        project_subtitle: document.getElementById('project-subtitle').textContent,
+        primary_color: getComputedStyle(document.documentElement).getPropertyValue('--primary') || '#11A89A'
+      };
+
+      function applyConfig(cfg){
+        if(!cfg) return;
+        if(cfg.project_title) document.getElementById('project-title').textContent = cfg.project_title;
+        if(cfg.project_subtitle) document.getElementById('project-subtitle').textContent = cfg.project_subtitle;
+        if(cfg.primary_color) document.documentElement.style.setProperty('--primary', cfg.primary_color);
+      }
+
+      if(window.elementSdk && typeof window.elementSdk.init === 'function'){
+        try{
+          window.elementSdk.init({ defaultConfig, onConfigChange: applyConfig });
+        }catch(e){ console.warn('elementSdk init failed', e); }
+      }
+    })();
+  </script>
+</body>
+</html>
