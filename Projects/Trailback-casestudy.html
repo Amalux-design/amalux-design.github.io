@@ -322,10 +322,10 @@ header, nav {
 }
 
 
-/* CLEAN, TEXT-ONLY ROLE & SCOPE SECTION */
+/* ROLE & SCOPE SECTION */
 .role-scope {
   background-color: #fff;
-  padding: 50px 0 40px;
+  padding: 60px 0 50px;
 }
 
 .role-scope h2 {
@@ -337,8 +337,11 @@ header, nav {
   text-align: left;
 }
 
-/* GRID LAYOUT FOR 4 ITEMS */
+/* WRAPPER WITH LIGHT BACKGROUND */
 .role-scope-grid {
+  background-color: #f7f7f7b4;
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 2rem;
@@ -359,10 +362,22 @@ header, nav {
   margin: 0;
 }
 
-/* RESPONSIVE STACK */
+/* RESPONSIVE STACKS */
 @media (max-width: 900px) {
   .role-scope-grid {
-    grid-template-colu
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .role-scope-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.25rem;
+  }
+}
 
 
 
@@ -627,6 +642,7 @@ Provide simple, reliable navigation tools with real-time route updates.
 
 </body>
 </html>
+
 
 
 
