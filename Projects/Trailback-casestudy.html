@@ -322,6 +322,49 @@ header, nav {
 }
 
 
+/* CLEAN, TEXT-ONLY ROLE & SCOPE SECTION */
+.role-scope {
+  background-color: #fff;
+  padding: 50px 0 40px;
+}
+
+.role-scope h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+/* GRID LAYOUT FOR 4 ITEMS */
+.role-scope-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.role-scope-grid h3 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.4rem;
+}
+
+.role-scope-grid p {
+  font-size: 0.95rem;
+  color: #333333;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* RESPONSIVE STACK */
+@media (max-width: 900px) {
+  .role-scope-grid {
+    grid-template-colu
+
+
 
   </style>
 </head>
@@ -337,7 +380,32 @@ header, nav {
 </section>
 
 
+<!-- Role and Scope -->
+<section class="role-scope">
+  <div class="content-wrapper">
+    <h2>Role and Scope</h2>
+    <div class="role-scope-grid">
+      <div>
+        <h3>My Role</h3>
+        <p>UX Researcher, UI Designer, Interaction Designer</p>
+      </div>
+      <div>
+        <h3>Scope</h3>
+        <p>User Research, Wireframing, Visual Design, Usability Testing</p>
+      </div>
+      <div>
+        <h3>Timeline</h3>
+        <p>6 Weeks — Research to High-Fidelity Prototype</p>
+      </div>
+      <div>
+        <h3>Tools</h3>
+        <p>Figma, FigJam, Illustrator, Photoshop</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+  
   <div class="content-wrapper">
     <!-- The Problem -->
     <section>
@@ -480,8 +548,8 @@ Provide simple, reliable navigation tools with real-time route updates.
 
       <div class="subsection">
         <h3>Onboarding</h3>
-        <p>Designed a concise 3-screen onboarding flow highlighting offline capabilities, safety features, and permission requirements. Tested with 12 users, achieving 95% completion rate.</p>
-        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762855512/onboarding_screen_faxz3x.webp" alt="Project Learnings" class="case-images">
+        <p>Designed a concise 4-screen onboarding flow highlighting offline capabilities and features. Tested with 8 users and were able to complete their first trail in under 1 minute.</p>
+        <img src="https://res.cloudinary.com/dgxb8m8lr/image/upload/v1762856214/Frame_1597880423_1_carhve.webp" alt="Project Learnings" class="case-images">
 
       </div>
 
@@ -559,4 +627,5 @@ Provide simple, reliable navigation tools with real-time route updates.
 
 </body>
 </html>
+
 
