@@ -905,6 +905,40 @@ a:hover {
   margin-bottom: 0;
 }
 
+/* =========================
+   SCALE DOWN NAVBAR BELOW LAPTOP
+   ========================= */
+@media (max-width: 980px) {
+
+  /* Reduce header height */
+  header {
+    padding: 0.6rem 5% !important;
+  }
+
+  /* Scale down logo (adjust this selector to your real logo class) */
+  header .logo {
+    transform: scale(0.8);
+    transform-origin: left center;
+  }
+
+  /* Reduce spacing between nav links */
+  .nav-links a,
+  .nav-links1 a {
+    padding: 3px 8px !important;
+    font-size: 1rem !important;
+  }
+
+  /* Make nav-links1 slightly smaller too */
+  .nav-links1 {
+    gap: 0.6rem;
+  }
+
+  /* Reduce arrow size a bit */
+  .nav-links a::after,
+  .nav-links1 a::after {
+    font-size: 0.9em;
+  }
+}
 
 </style>
   
@@ -1399,6 +1433,7 @@ document.querySelectorAll("#process .process-step h3").forEach(h3 => {
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'999a19c0f020c122',t:'MTc2MjMyMjEwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
 
