@@ -951,6 +951,29 @@ header.nav-hidden {
   transform: translateY(-100%);
 }
 
+#scrollTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 22px;
+  display: none; /* hidden until scroll */
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: opacity 0.3s ease;
+}
+
+#scrollTopBtn.show {
+  display: flex;
+  opacity: 1;
+}
 
 </style>
   
@@ -1260,6 +1283,15 @@ header.nav-hidden {
     </div>
   </div>
 </section>
+
+
+<button id="scrollTopBtn">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="black">
+    <path d="M6 15L12 9L18 15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+</button>
+
+
   
 <div class="section-divider"></div><!-- About Section -->
 
@@ -1467,11 +1499,28 @@ window.addEventListener("scroll", () => {
   lastScrollY = window.scrollY;
 });
 
+ const btn = document.getElementById("scrollTopBtn");
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 200) {
+      btn.classList.add("show");
+    } else {
+      btn.classList.remove("show");
+    }
+  });
+
+  btn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth" // <-- instantly jump
+    });
+  });
 
 
   </script>
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'999a19c0f020c122',t:'MTc2MjMyMjEwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
 
 
 
